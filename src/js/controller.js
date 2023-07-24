@@ -3,16 +3,6 @@ import 'regenerator-runtime/runtime'
 import * as model from './model'
 import recipeView from './views/recipeView'
 
-const recipeContainer = document.querySelector('.recipe')
-
-const timeout = function (s) {
-	return new Promise(function (_, reject) {
-		setTimeout(function () {
-			reject(new Error(`Request took too long! Timeout after ${s} second`))
-		}, s * 1000)
-	})
-}
-
 // https://forkify-api.herokuapp.com/v2
 
 ///////////////////////////////////////
@@ -24,12 +14,18 @@ const controlRecipes = async () => {
 		recipeView.renderSpinner()
 		//1)) Loading recipe
 		await model.loadRecipe(id)
-
 		//2) Rendering recipe
 		recipeView.render(model.state.recipe)
 	} catch (err) {
-		console.error(err.message)
+		recipeView.renderError()
 	}
 }
 
-;['hashchange', 'load'].forEach(ev => window.addEventListener(ev, controlRecipes))
+const init = () => {
+	recipeView.addHandlerRender(controlRecipes)
+}
+init()
+
+// const div = document.querySelector('.search-results')
+
+// div.innerHTML = `<a href='#5ed6604591c37cdc054bcd09'>link1</a><a href='#5ed6604591c37cdc054bcebczzzz'>link2</a>`
