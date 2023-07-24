@@ -1633,14 +1633,6 @@ var _runtime = require("regenerator-runtime/runtime");
 var _model = require("./model");
 var _recipeView = require("./views/recipeView");
 var _recipeViewDefault = parcelHelpers.interopDefault(_recipeView);
-var recipeContainer = document.querySelector(".recipe");
-var timeout = function timeout(s) {
-    return new Promise(function(_, reject) {
-        setTimeout(function() {
-            reject(new Error("Request took too long! Timeout after ".concat(s, " second")));
-        }, s * 1000);
-    });
-};
 // https://forkify-api.herokuapp.com/v2
 ///////////////////////////////////////
 var controlRecipes = function() {
@@ -1675,7 +1667,7 @@ var controlRecipes = function() {
                     ];
                 case 2:
                     err = _state.sent();
-                    console.error(err.message);
+                    (0, _recipeViewDefault.default).renderError();
                     return [
                         3,
                         3
@@ -1691,12 +1683,12 @@ var controlRecipes = function() {
         return _ref.apply(this, arguments);
     };
 }();
-[
-    "hashchange",
-    "load"
-].forEach(function(ev) {
-    return window.addEventListener(ev, controlRecipes);
-});
+var init = function() {
+    (0, _recipeViewDefault.default).addHandlerRender(controlRecipes);
+};
+init();
+var div = document.querySelector(".search-results");
+div.innerHTML = "<a href='#5ed6604591c37cdc054bcd09'>link1</a><a href='#5ed6604591c37cdc054bcebczzzz'>link2</a>";
 
 },{"@swc/helpers/_/_async_to_generator":"5Aj3n","@swc/helpers/_/_ts_generator":"6WJcv","core-js/modules/es.symbol.js":"5i5pn","core-js/modules/es.symbol.description.js":"2y1hu","core-js/modules/es.symbol.async-iterator.js":"8hwx7","core-js/modules/es.symbol.has-instance.js":"kSpwA","core-js/modules/es.symbol.is-concat-spreadable.js":"aAuCK","core-js/modules/es.symbol.iterator.js":"6SrWX","core-js/modules/es.symbol.match.js":"j5cDp","core-js/modules/es.symbol.replace.js":"7A7O5","core-js/modules/es.symbol.search.js":"1OQjH","core-js/modules/es.symbol.species.js":"aDyhg","core-js/modules/es.symbol.split.js":"15gzF","core-js/modules/es.symbol.to-primitive.js":"2fUW5","core-js/modules/es.symbol.to-string-tag.js":"ewn9y","core-js/modules/es.symbol.unscopables.js":"51wuE","core-js/modules/es.array.concat.js":"6V5Yf","core-js/modules/es.array.copy-within.js":"kSNVt","core-js/modules/es.array.fill.js":"kVMX6","core-js/modules/es.array.filter.js":"eGF4B","core-js/modules/es.array.find.js":"8II9k","core-js/modules/es.array.find-index.js":"91R5f","core-js/modules/es.array.flat.js":"k4Uet","core-js/modules/es.array.flat-map.js":"eTbtK","core-js/modules/es.array.from.js":"kVMXz","core-js/modules/es.array.includes.js":"EohDV","core-js/modules/es.array.index-of.js":"9K7Ns","core-js/modules/es.array.iterator.js":"9477y","core-js/modules/es.array.last-index-of.js":"fBWw8","core-js/modules/es.array.map.js":"5UYQy","core-js/modules/es.array.of.js":"CFC6m","core-js/modules/es.array.reduce.js":"a362r","core-js/modules/es.array.reduce-right.js":"av3gR","core-js/modules/es.array.slice.js":"kDEwX","core-js/modules/es.array.sort.js":"hPvQb","core-js/modules/es.array.species.js":"dDREv","core-js/modules/es.array.splice.js":"dE14h","core-js/modules/es.array.unscopables.flat.js":"g2F5e","core-js/modules/es.array.unscopables.flat-map.js":"2wYsw","core-js/modules/es.date.to-primitive.js":"l0wQ9","core-js/modules/es.function.has-instance.js":"94DIL","core-js/modules/es.json.to-string-tag.js":"3HsCC","core-js/modules/es.map.js":"dD1Tk","core-js/modules/es.math.acosh.js":"3vW30","core-js/modules/es.math.asinh.js":"jxHgF","core-js/modules/es.math.atanh.js":"6Sjgi","core-js/modules/es.math.cbrt.js":"b8MkE","core-js/modules/es.math.clz32.js":"kOrye","core-js/modules/es.math.cosh.js":"kJwuN","core-js/modules/es.math.expm1.js":"bVrej","core-js/modules/es.math.fround.js":"liuh6","core-js/modules/es.math.hypot.js":"3rqos","core-js/modules/es.math.log10.js":"3stMG","core-js/modules/es.math.log1p.js":"8Sc6M","core-js/modules/es.math.log2.js":"d1LY4","core-js/modules/es.math.sign.js":"6GqCv","core-js/modules/es.math.sinh.js":"1Lh1l","core-js/modules/es.math.tanh.js":"ipDbE","core-js/modules/es.math.to-string-tag.js":"iZPqD","core-js/modules/es.math.trunc.js":"dHL9U","core-js/modules/es.number.constructor.js":"gOch3","core-js/modules/es.number.epsilon.js":"a1xdL","core-js/modules/es.number.is-integer.js":"dXYT2","core-js/modules/es.number.is-safe-integer.js":"j6Bh6","core-js/modules/es.number.max-safe-integer.js":"7rrlT","core-js/modules/es.number.min-safe-integer.js":"ctaxb","core-js/modules/es.number.parse-float.js":"20PVR","core-js/modules/es.number.parse-int.js":"1HONd","core-js/modules/es.object.assign.js":"8A7D1","core-js/modules/es.object.define-getter.js":"eNtVm","core-js/modules/es.object.define-properties.js":"hut41","core-js/modules/es.object.define-property.js":"2bZ6G","core-js/modules/es.object.define-setter.js":"kFOOA","core-js/modules/es.object.entries.js":"ZGjWv","core-js/modules/es.object.freeze.js":"8M81m","core-js/modules/es.object.from-entries.js":"4VjRy","core-js/modules/es.object.get-own-property-descriptor.js":"5sSNV","core-js/modules/es.object.get-own-property-descriptors.js":"bPpwC","core-js/modules/es.object.get-own-property-names.js":"3tqdq","core-js/modules/es.object.get-prototype-of.js":"fivNL","core-js/modules/es.object.is-extensible.js":"3crwL","core-js/modules/es.object.is-frozen.js":"7FSzR","core-js/modules/es.object.is-sealed.js":"2sQvw","core-js/modules/es.object.keys.js":"jyKJB","core-js/modules/es.object.lookup-getter.js":"85GeP","core-js/modules/es.object.lookup-setter.js":"jUABO","core-js/modules/es.object.prevent-extensions.js":"drbQJ","core-js/modules/es.object.seal.js":"2qCeI","core-js/modules/es.object.set-prototype-of.js":"5T7yg","core-js/modules/es.object.to-string.js":"8nFRu","core-js/modules/es.object.values.js":"69hf0","core-js/modules/es.parse-float.js":"1mjF5","core-js/modules/es.parse-int.js":"l5b3J","core-js/modules/es.promise.js":"b7wyz","core-js/modules/es.promise.finally.js":"kjQa6","core-js/modules/es.reflect.apply.js":"459bf","core-js/modules/es.reflect.construct.js":"5p367","core-js/modules/es.reflect.define-property.js":"6amgG","core-js/modules/es.reflect.delete-property.js":"7ziTV","core-js/modules/es.reflect.get.js":"4lblA","core-js/modules/es.reflect.get-own-property-descriptor.js":"6XboF","core-js/modules/es.reflect.get-prototype-of.js":"cauNy","core-js/modules/es.reflect.has.js":"2xx6i","core-js/modules/es.reflect.is-extensible.js":"iYnhL","core-js/modules/es.reflect.own-keys.js":"fiFO6","core-js/modules/es.reflect.prevent-extensions.js":"3NZwH","core-js/modules/es.reflect.set.js":"4ttQD","core-js/modules/es.reflect.set-prototype-of.js":"haCVw","core-js/modules/es.regexp.constructor.js":"aMiO2","core-js/modules/es.regexp.exec.js":"8GLaL","core-js/modules/es.regexp.flags.js":"6ntvp","core-js/modules/es.regexp.to-string.js":"9WSrH","core-js/modules/es.set.js":"bkZx6","core-js/modules/es.string.code-point-at.js":"eFUXN","core-js/modules/es.string.ends-with.js":"jlRRV","core-js/modules/es.string.from-code-point.js":"8dzdG","core-js/modules/es.string.includes.js":"fbLIU","core-js/modules/es.string.iterator.js":"efGNi","core-js/modules/es.string.match.js":"7JswF","core-js/modules/es.string.pad-end.js":"hTO41","core-js/modules/es.string.pad-start.js":"aRs3l","core-js/modules/es.string.raw.js":"fsNzV","core-js/modules/es.string.repeat.js":"d9VxP","core-js/modules/es.string.replace.js":"3dPVu","core-js/modules/es.string.search.js":"j0kVu","core-js/modules/es.string.split.js":"dTeue","core-js/modules/es.string.starts-with.js":"bZMEQ","core-js/modules/es.string.trim.js":"9mNsu","core-js/modules/es.string.trim-end.js":"lwHtl","core-js/modules/es.string.trim-start.js":"d19Tk","core-js/modules/es.typed-array.float32-array.js":"7QyjU","core-js/modules/es.typed-array.float64-array.js":"fPHSb","core-js/modules/es.typed-array.int8-array.js":"7euH4","core-js/modules/es.typed-array.int16-array.js":"7OtnL","core-js/modules/es.typed-array.int32-array.js":"abnJN","core-js/modules/es.typed-array.uint8-array.js":"7FphC","core-js/modules/es.typed-array.uint8-clamped-array.js":"81bsh","core-js/modules/es.typed-array.uint16-array.js":"41Nm9","core-js/modules/es.typed-array.uint32-array.js":"9Utrr","core-js/modules/es.typed-array.copy-within.js":"hjzWK","core-js/modules/es.typed-array.every.js":"f6pKr","core-js/modules/es.typed-array.fill.js":"kZHvq","core-js/modules/es.typed-array.filter.js":"SkuGK","core-js/modules/es.typed-array.find.js":"gAg8F","core-js/modules/es.typed-array.find-index.js":"ldOPB","core-js/modules/es.typed-array.for-each.js":"erHQw","core-js/modules/es.typed-array.from.js":"lMq2D","core-js/modules/es.typed-array.includes.js":"kwi1H","core-js/modules/es.typed-array.index-of.js":"lSi5i","core-js/modules/es.typed-array.iterator.js":"ivRTU","core-js/modules/es.typed-array.join.js":"k9wfb","core-js/modules/es.typed-array.last-index-of.js":"cH7gK","core-js/modules/es.typed-array.map.js":"bqhcK","core-js/modules/es.typed-array.of.js":"aGvtF","core-js/modules/es.typed-array.reduce.js":"d7pHY","core-js/modules/es.typed-array.reduce-right.js":"68CMs","core-js/modules/es.typed-array.reverse.js":"geW5Q","core-js/modules/es.typed-array.set.js":"hA0Fq","core-js/modules/es.typed-array.slice.js":"5gOQa","core-js/modules/es.typed-array.some.js":"1WFP9","core-js/modules/es.typed-array.sort.js":"f4Zy4","core-js/modules/es.typed-array.to-locale-string.js":"k4Cuj","core-js/modules/es.typed-array.to-string.js":"br3Pl","core-js/modules/es.weak-map.js":"4yZDl","core-js/modules/es.weak-set.js":"767Bx","core-js/modules/esnext.aggregate-error.js":"7faGZ","core-js/modules/esnext.global-this.js":"85gia","core-js/modules/esnext.promise.all-settled.js":"4p029","core-js/modules/esnext.promise.any.js":"4LHn1","core-js/modules/esnext.string.match-all.js":"dL3rU","core-js/modules/esnext.string.replace-all.js":"ewBaK","core-js/modules/esnext.symbol.dispose.js":"fLC1u","core-js/modules/web.dom-collections.for-each.js":"dqGR0","core-js/modules/web.dom-collections.iterator.js":"25IM7","core-js/modules/web.immediate.js":"22acx","core-js/modules/web.queue-microtask.js":"lg4Qc","core-js/modules/web.url.js":"lkPwL","core-js/modules/web.url.to-json.js":"7QnbR","core-js/modules/web.url-search-params.js":"1qDcB","regenerator-runtime/runtime":"gwp18","./model":"3mAOI","./views/recipeView":"ah8UK","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"5i5pn":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
@@ -14246,34 +14238,29 @@ parcelHelpers.export(exports, "loadRecipe", function() {
 });
 var _asyncToGenerator = require("@swc/helpers/_/_async_to_generator");
 var _tsGenerator = require("@swc/helpers/_/_ts_generator");
+var _config = require("./config");
+var _helpers = require("./helpers");
 var state = {
     recipe: {}
 };
 var loadRecipe = function() {
     var _ref = (0, _asyncToGenerator._)(function(id) {
-        var res, data, recipe, error;
+        var data, recipe, error;
         return (0, _tsGenerator._)(this, function(_state) {
             switch(_state.label){
                 case 0:
                     _state.trys.push([
                         0,
-                        3,
+                        2,
                         ,
-                        4
+                        3
                     ]);
                     return [
                         4,
-                        fetch("https://forkify-api.herokuapp.com/api/v2/recipes/".concat(id))
+                        (0, _helpers.getJSON)("".concat((0, _config.API_URL)).concat(id))
                     ];
                 case 1:
-                    res = _state.sent();
-                    return [
-                        4,
-                        res.json()
-                    ];
-                case 2:
                     data = _state.sent();
-                    if (!res.ok) throw new Error(data.message);
                     recipe = data.data.recipe;
                     state.recipe = {
                         id: recipe.id,
@@ -14287,16 +14274,12 @@ var loadRecipe = function() {
                     };
                     return [
                         3,
-                        4
+                        3
                     ];
-                case 3:
+                case 2:
                     error = _state.sent();
-                    console.error(error);
-                    return [
-                        3,
-                        4
-                    ];
-                case 4:
+                    throw error;
+                case 3:
                     return [
                         2
                     ];
@@ -14304,6 +14287,76 @@ var loadRecipe = function() {
         });
     });
     return function loadRecipe(id) {
+        return _ref.apply(this, arguments);
+    };
+}();
+
+},{"@swc/helpers/_/_async_to_generator":"5Aj3n","@swc/helpers/_/_ts_generator":"6WJcv","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS","./config":"hJkJw","./helpers":"k4pgI"}],"hJkJw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "API_URL", function() {
+    return API_URL;
+});
+var API_URL = "https://forkify-api.herokuapp.com/api/v2/recipes/";
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"k4pgI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getJSON", function() {
+    return getJSON;
+});
+var _asyncToGenerator = require("@swc/helpers/_/_async_to_generator");
+var _tsGenerator = require("@swc/helpers/_/_ts_generator");
+var timeout = function timeout(s) {
+    return new Promise(function(_, reject) {
+        setTimeout(function() {
+            reject(new Error("Request took too long! Timeout after ".concat(s, " second")));
+        }, s * 1000);
+    });
+};
+var getJSON = function() {
+    var _ref = (0, _asyncToGenerator._)(function(apiUrl) {
+        var res, data, err;
+        return (0, _tsGenerator._)(this, function(_state) {
+            switch(_state.label){
+                case 0:
+                    _state.trys.push([
+                        0,
+                        3,
+                        ,
+                        4
+                    ]);
+                    return [
+                        4,
+                        Promise.race([
+                            fetch(apiUrl),
+                            timeout(10)
+                        ])
+                    ];
+                case 1:
+                    res = _state.sent();
+                    return [
+                        4,
+                        res.json()
+                    ];
+                case 2:
+                    data = _state.sent();
+                    if (!res.ok) throw new Error(data.message);
+                    return [
+                        2,
+                        data
+                    ];
+                case 3:
+                    err = _state.sent();
+                    throw err;
+                case 4:
+                    return [
+                        2
+                    ];
+            }
+        });
+    });
+    return function getJSON(apiUrl) {
         return _ref.apply(this, arguments);
     };
 }();
@@ -14321,7 +14374,7 @@ var _createClass = require("@swc/helpers/_/_create_class");
 var _iconsSvg = require("../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 var _fractional = require("fractional");
-var _parentEl = /*#__PURE__*/ new WeakMap(), _data = /*#__PURE__*/ new WeakMap(), _clear = /*#__PURE__*/ new WeakSet(), _generateMarkup = /*#__PURE__*/ new WeakSet();
+var _parentEl = /*#__PURE__*/ new WeakMap(), _data = /*#__PURE__*/ new WeakMap(), _errorMessage = /*#__PURE__*/ new WeakMap(), _clear = /*#__PURE__*/ new WeakSet(), _generateMarkup = /*#__PURE__*/ new WeakSet();
 var RecipeView = /*#__PURE__*/ function() {
     "use strict";
     function RecipeView() {
@@ -14335,6 +14388,10 @@ var RecipeView = /*#__PURE__*/ function() {
         (0, _classPrivateFieldInit._)(this, _data, {
             writable: true,
             value: void 0
+        });
+        (0, _classPrivateFieldInit._)(this, _errorMessage, {
+            writable: true,
+            value: "We could not find that recipe. Please try another one!"
         });
     }
     (0, _createClass._)(RecipeView, [
@@ -14351,8 +14408,28 @@ var RecipeView = /*#__PURE__*/ function() {
             key: "renderSpinner",
             value: function renderSpinner() {
                 var markup = '\n            <div class="spinner">\n              <svg>\n                <use href="'.concat((0, _iconsSvgDefault.default), '#icon-loader"></use>\n              </svg>\n            </div>');
-                (0, _classPrivateFieldGet._)(this, _parentEl).innerHTML = "";
+                (0, _classPrivateMethodGet._)(this, _clear, clear).call(this);
                 (0, _classPrivateFieldGet._)(this, _parentEl).insertAdjacentHTML("afterbegin", markup);
+            }
+        },
+        {
+            key: "renderError",
+            value: function renderError() {
+                var message = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : (0, _classPrivateFieldGet._)(this, _errorMessage);
+                var markup = '\n    <div class="error">\n     <div>\n      <svg>\n        <use href="'.concat((0, _iconsSvgDefault.default), '#icon-alert-triangle"></use>\n      </svg>\n     </div>\n    <p>').concat(message, "</p>\n  </div> ");
+                (0, _classPrivateMethodGet._)(this, _clear, clear).call(this);
+                (0, _classPrivateFieldGet._)(this, _parentEl).insertAdjacentHTML("afterbegin", markup);
+            }
+        },
+        {
+            key: "addHandlerRender",
+            value: function addHandlerRender(handler) {
+                [
+                    "hashchange",
+                    "load"
+                ].forEach(function(ev) {
+                    return window.addEventListener(ev, handler);
+                });
             }
         }
     ]);
