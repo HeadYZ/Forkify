@@ -1633,8 +1633,10 @@ var _runtime = require("regenerator-runtime/runtime");
 var _model = require("./model");
 var _recipeView = require("./views/recipeView");
 var _recipeViewDefault = parcelHelpers.interopDefault(_recipeView);
-// https://forkify-api.herokuapp.com/v2
-///////////////////////////////////////
+var _searchView = require("./views/searchView");
+var _searchViewDefault = parcelHelpers.interopDefault(_searchView);
+var _resultsView = require("./views/resultsView");
+var _resultsViewDefault = parcelHelpers.interopDefault(_resultsView);
 var controlRecipes = function() {
     var _ref = (0, _asyncToGenerator._)(function() {
         var id, err;
@@ -1683,14 +1685,58 @@ var controlRecipes = function() {
         return _ref.apply(this, arguments);
     };
 }();
+var controlSearchResults = function() {
+    var _ref = (0, _asyncToGenerator._)(function() {
+        var query, err;
+        return (0, _tsGenerator._)(this, function(_state) {
+            switch(_state.label){
+                case 0:
+                    _state.trys.push([
+                        0,
+                        2,
+                        ,
+                        3
+                    ]);
+                    query = (0, _searchViewDefault.default).getQuery();
+                    if (!query) return [
+                        2
+                    ];
+                    // 2) load search results
+                    return [
+                        4,
+                        _model.loadSearchResults(query)
+                    ];
+                case 1:
+                    _state.sent();
+                    (0, _resultsViewDefault.default).render(_model.state.search.results);
+                    return [
+                        3,
+                        3
+                    ];
+                case 2:
+                    err = _state.sent();
+                    return [
+                        3,
+                        3
+                    ];
+                case 3:
+                    return [
+                        2
+                    ];
+            }
+        });
+    });
+    return function controlSearchResults() {
+        return _ref.apply(this, arguments);
+    };
+}();
 var init = function() {
     (0, _recipeViewDefault.default).addHandlerRender(controlRecipes);
+    (0, _searchViewDefault.default).addHandlerSearch(controlSearchResults);
 };
 init();
-var div = document.querySelector(".search-results");
-div.innerHTML = "<a href='#5ed6604591c37cdc054bcd09'>link1</a><a href='#5ed6604591c37cdc054bcebczzzz'>link2</a>";
 
-},{"@swc/helpers/_/_async_to_generator":"5Aj3n","@swc/helpers/_/_ts_generator":"6WJcv","core-js/modules/es.symbol.js":"5i5pn","core-js/modules/es.symbol.description.js":"2y1hu","core-js/modules/es.symbol.async-iterator.js":"8hwx7","core-js/modules/es.symbol.has-instance.js":"kSpwA","core-js/modules/es.symbol.is-concat-spreadable.js":"aAuCK","core-js/modules/es.symbol.iterator.js":"6SrWX","core-js/modules/es.symbol.match.js":"j5cDp","core-js/modules/es.symbol.replace.js":"7A7O5","core-js/modules/es.symbol.search.js":"1OQjH","core-js/modules/es.symbol.species.js":"aDyhg","core-js/modules/es.symbol.split.js":"15gzF","core-js/modules/es.symbol.to-primitive.js":"2fUW5","core-js/modules/es.symbol.to-string-tag.js":"ewn9y","core-js/modules/es.symbol.unscopables.js":"51wuE","core-js/modules/es.array.concat.js":"6V5Yf","core-js/modules/es.array.copy-within.js":"kSNVt","core-js/modules/es.array.fill.js":"kVMX6","core-js/modules/es.array.filter.js":"eGF4B","core-js/modules/es.array.find.js":"8II9k","core-js/modules/es.array.find-index.js":"91R5f","core-js/modules/es.array.flat.js":"k4Uet","core-js/modules/es.array.flat-map.js":"eTbtK","core-js/modules/es.array.from.js":"kVMXz","core-js/modules/es.array.includes.js":"EohDV","core-js/modules/es.array.index-of.js":"9K7Ns","core-js/modules/es.array.iterator.js":"9477y","core-js/modules/es.array.last-index-of.js":"fBWw8","core-js/modules/es.array.map.js":"5UYQy","core-js/modules/es.array.of.js":"CFC6m","core-js/modules/es.array.reduce.js":"a362r","core-js/modules/es.array.reduce-right.js":"av3gR","core-js/modules/es.array.slice.js":"kDEwX","core-js/modules/es.array.sort.js":"hPvQb","core-js/modules/es.array.species.js":"dDREv","core-js/modules/es.array.splice.js":"dE14h","core-js/modules/es.array.unscopables.flat.js":"g2F5e","core-js/modules/es.array.unscopables.flat-map.js":"2wYsw","core-js/modules/es.date.to-primitive.js":"l0wQ9","core-js/modules/es.function.has-instance.js":"94DIL","core-js/modules/es.json.to-string-tag.js":"3HsCC","core-js/modules/es.map.js":"dD1Tk","core-js/modules/es.math.acosh.js":"3vW30","core-js/modules/es.math.asinh.js":"jxHgF","core-js/modules/es.math.atanh.js":"6Sjgi","core-js/modules/es.math.cbrt.js":"b8MkE","core-js/modules/es.math.clz32.js":"kOrye","core-js/modules/es.math.cosh.js":"kJwuN","core-js/modules/es.math.expm1.js":"bVrej","core-js/modules/es.math.fround.js":"liuh6","core-js/modules/es.math.hypot.js":"3rqos","core-js/modules/es.math.log10.js":"3stMG","core-js/modules/es.math.log1p.js":"8Sc6M","core-js/modules/es.math.log2.js":"d1LY4","core-js/modules/es.math.sign.js":"6GqCv","core-js/modules/es.math.sinh.js":"1Lh1l","core-js/modules/es.math.tanh.js":"ipDbE","core-js/modules/es.math.to-string-tag.js":"iZPqD","core-js/modules/es.math.trunc.js":"dHL9U","core-js/modules/es.number.constructor.js":"gOch3","core-js/modules/es.number.epsilon.js":"a1xdL","core-js/modules/es.number.is-integer.js":"dXYT2","core-js/modules/es.number.is-safe-integer.js":"j6Bh6","core-js/modules/es.number.max-safe-integer.js":"7rrlT","core-js/modules/es.number.min-safe-integer.js":"ctaxb","core-js/modules/es.number.parse-float.js":"20PVR","core-js/modules/es.number.parse-int.js":"1HONd","core-js/modules/es.object.assign.js":"8A7D1","core-js/modules/es.object.define-getter.js":"eNtVm","core-js/modules/es.object.define-properties.js":"hut41","core-js/modules/es.object.define-property.js":"2bZ6G","core-js/modules/es.object.define-setter.js":"kFOOA","core-js/modules/es.object.entries.js":"ZGjWv","core-js/modules/es.object.freeze.js":"8M81m","core-js/modules/es.object.from-entries.js":"4VjRy","core-js/modules/es.object.get-own-property-descriptor.js":"5sSNV","core-js/modules/es.object.get-own-property-descriptors.js":"bPpwC","core-js/modules/es.object.get-own-property-names.js":"3tqdq","core-js/modules/es.object.get-prototype-of.js":"fivNL","core-js/modules/es.object.is-extensible.js":"3crwL","core-js/modules/es.object.is-frozen.js":"7FSzR","core-js/modules/es.object.is-sealed.js":"2sQvw","core-js/modules/es.object.keys.js":"jyKJB","core-js/modules/es.object.lookup-getter.js":"85GeP","core-js/modules/es.object.lookup-setter.js":"jUABO","core-js/modules/es.object.prevent-extensions.js":"drbQJ","core-js/modules/es.object.seal.js":"2qCeI","core-js/modules/es.object.set-prototype-of.js":"5T7yg","core-js/modules/es.object.to-string.js":"8nFRu","core-js/modules/es.object.values.js":"69hf0","core-js/modules/es.parse-float.js":"1mjF5","core-js/modules/es.parse-int.js":"l5b3J","core-js/modules/es.promise.js":"b7wyz","core-js/modules/es.promise.finally.js":"kjQa6","core-js/modules/es.reflect.apply.js":"459bf","core-js/modules/es.reflect.construct.js":"5p367","core-js/modules/es.reflect.define-property.js":"6amgG","core-js/modules/es.reflect.delete-property.js":"7ziTV","core-js/modules/es.reflect.get.js":"4lblA","core-js/modules/es.reflect.get-own-property-descriptor.js":"6XboF","core-js/modules/es.reflect.get-prototype-of.js":"cauNy","core-js/modules/es.reflect.has.js":"2xx6i","core-js/modules/es.reflect.is-extensible.js":"iYnhL","core-js/modules/es.reflect.own-keys.js":"fiFO6","core-js/modules/es.reflect.prevent-extensions.js":"3NZwH","core-js/modules/es.reflect.set.js":"4ttQD","core-js/modules/es.reflect.set-prototype-of.js":"haCVw","core-js/modules/es.regexp.constructor.js":"aMiO2","core-js/modules/es.regexp.exec.js":"8GLaL","core-js/modules/es.regexp.flags.js":"6ntvp","core-js/modules/es.regexp.to-string.js":"9WSrH","core-js/modules/es.set.js":"bkZx6","core-js/modules/es.string.code-point-at.js":"eFUXN","core-js/modules/es.string.ends-with.js":"jlRRV","core-js/modules/es.string.from-code-point.js":"8dzdG","core-js/modules/es.string.includes.js":"fbLIU","core-js/modules/es.string.iterator.js":"efGNi","core-js/modules/es.string.match.js":"7JswF","core-js/modules/es.string.pad-end.js":"hTO41","core-js/modules/es.string.pad-start.js":"aRs3l","core-js/modules/es.string.raw.js":"fsNzV","core-js/modules/es.string.repeat.js":"d9VxP","core-js/modules/es.string.replace.js":"3dPVu","core-js/modules/es.string.search.js":"j0kVu","core-js/modules/es.string.split.js":"dTeue","core-js/modules/es.string.starts-with.js":"bZMEQ","core-js/modules/es.string.trim.js":"9mNsu","core-js/modules/es.string.trim-end.js":"lwHtl","core-js/modules/es.string.trim-start.js":"d19Tk","core-js/modules/es.typed-array.float32-array.js":"7QyjU","core-js/modules/es.typed-array.float64-array.js":"fPHSb","core-js/modules/es.typed-array.int8-array.js":"7euH4","core-js/modules/es.typed-array.int16-array.js":"7OtnL","core-js/modules/es.typed-array.int32-array.js":"abnJN","core-js/modules/es.typed-array.uint8-array.js":"7FphC","core-js/modules/es.typed-array.uint8-clamped-array.js":"81bsh","core-js/modules/es.typed-array.uint16-array.js":"41Nm9","core-js/modules/es.typed-array.uint32-array.js":"9Utrr","core-js/modules/es.typed-array.copy-within.js":"hjzWK","core-js/modules/es.typed-array.every.js":"f6pKr","core-js/modules/es.typed-array.fill.js":"kZHvq","core-js/modules/es.typed-array.filter.js":"SkuGK","core-js/modules/es.typed-array.find.js":"gAg8F","core-js/modules/es.typed-array.find-index.js":"ldOPB","core-js/modules/es.typed-array.for-each.js":"erHQw","core-js/modules/es.typed-array.from.js":"lMq2D","core-js/modules/es.typed-array.includes.js":"kwi1H","core-js/modules/es.typed-array.index-of.js":"lSi5i","core-js/modules/es.typed-array.iterator.js":"ivRTU","core-js/modules/es.typed-array.join.js":"k9wfb","core-js/modules/es.typed-array.last-index-of.js":"cH7gK","core-js/modules/es.typed-array.map.js":"bqhcK","core-js/modules/es.typed-array.of.js":"aGvtF","core-js/modules/es.typed-array.reduce.js":"d7pHY","core-js/modules/es.typed-array.reduce-right.js":"68CMs","core-js/modules/es.typed-array.reverse.js":"geW5Q","core-js/modules/es.typed-array.set.js":"hA0Fq","core-js/modules/es.typed-array.slice.js":"5gOQa","core-js/modules/es.typed-array.some.js":"1WFP9","core-js/modules/es.typed-array.sort.js":"f4Zy4","core-js/modules/es.typed-array.to-locale-string.js":"k4Cuj","core-js/modules/es.typed-array.to-string.js":"br3Pl","core-js/modules/es.weak-map.js":"4yZDl","core-js/modules/es.weak-set.js":"767Bx","core-js/modules/esnext.aggregate-error.js":"7faGZ","core-js/modules/esnext.global-this.js":"85gia","core-js/modules/esnext.promise.all-settled.js":"4p029","core-js/modules/esnext.promise.any.js":"4LHn1","core-js/modules/esnext.string.match-all.js":"dL3rU","core-js/modules/esnext.string.replace-all.js":"ewBaK","core-js/modules/esnext.symbol.dispose.js":"fLC1u","core-js/modules/web.dom-collections.for-each.js":"dqGR0","core-js/modules/web.dom-collections.iterator.js":"25IM7","core-js/modules/web.immediate.js":"22acx","core-js/modules/web.queue-microtask.js":"lg4Qc","core-js/modules/web.url.js":"lkPwL","core-js/modules/web.url.to-json.js":"7QnbR","core-js/modules/web.url-search-params.js":"1qDcB","regenerator-runtime/runtime":"gwp18","./model":"3mAOI","./views/recipeView":"ah8UK","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"5i5pn":[function(require,module,exports) {
+},{"@swc/helpers/_/_async_to_generator":"5Aj3n","@swc/helpers/_/_ts_generator":"6WJcv","core-js/modules/es.symbol.js":"5i5pn","core-js/modules/es.symbol.description.js":"2y1hu","core-js/modules/es.symbol.async-iterator.js":"8hwx7","core-js/modules/es.symbol.has-instance.js":"kSpwA","core-js/modules/es.symbol.is-concat-spreadable.js":"aAuCK","core-js/modules/es.symbol.iterator.js":"6SrWX","core-js/modules/es.symbol.match.js":"j5cDp","core-js/modules/es.symbol.replace.js":"7A7O5","core-js/modules/es.symbol.search.js":"1OQjH","core-js/modules/es.symbol.species.js":"aDyhg","core-js/modules/es.symbol.split.js":"15gzF","core-js/modules/es.symbol.to-primitive.js":"2fUW5","core-js/modules/es.symbol.to-string-tag.js":"ewn9y","core-js/modules/es.symbol.unscopables.js":"51wuE","core-js/modules/es.array.concat.js":"6V5Yf","core-js/modules/es.array.copy-within.js":"kSNVt","core-js/modules/es.array.fill.js":"kVMX6","core-js/modules/es.array.filter.js":"eGF4B","core-js/modules/es.array.find.js":"8II9k","core-js/modules/es.array.find-index.js":"91R5f","core-js/modules/es.array.flat.js":"k4Uet","core-js/modules/es.array.flat-map.js":"eTbtK","core-js/modules/es.array.from.js":"kVMXz","core-js/modules/es.array.includes.js":"EohDV","core-js/modules/es.array.index-of.js":"9K7Ns","core-js/modules/es.array.iterator.js":"9477y","core-js/modules/es.array.last-index-of.js":"fBWw8","core-js/modules/es.array.map.js":"5UYQy","core-js/modules/es.array.of.js":"CFC6m","core-js/modules/es.array.reduce.js":"a362r","core-js/modules/es.array.reduce-right.js":"av3gR","core-js/modules/es.array.slice.js":"kDEwX","core-js/modules/es.array.sort.js":"hPvQb","core-js/modules/es.array.species.js":"dDREv","core-js/modules/es.array.splice.js":"dE14h","core-js/modules/es.array.unscopables.flat.js":"g2F5e","core-js/modules/es.array.unscopables.flat-map.js":"2wYsw","core-js/modules/es.date.to-primitive.js":"l0wQ9","core-js/modules/es.function.has-instance.js":"94DIL","core-js/modules/es.json.to-string-tag.js":"3HsCC","core-js/modules/es.map.js":"dD1Tk","core-js/modules/es.math.acosh.js":"3vW30","core-js/modules/es.math.asinh.js":"jxHgF","core-js/modules/es.math.atanh.js":"6Sjgi","core-js/modules/es.math.cbrt.js":"b8MkE","core-js/modules/es.math.clz32.js":"kOrye","core-js/modules/es.math.cosh.js":"kJwuN","core-js/modules/es.math.expm1.js":"bVrej","core-js/modules/es.math.fround.js":"liuh6","core-js/modules/es.math.hypot.js":"3rqos","core-js/modules/es.math.log10.js":"3stMG","core-js/modules/es.math.log1p.js":"8Sc6M","core-js/modules/es.math.log2.js":"d1LY4","core-js/modules/es.math.sign.js":"6GqCv","core-js/modules/es.math.sinh.js":"1Lh1l","core-js/modules/es.math.tanh.js":"ipDbE","core-js/modules/es.math.to-string-tag.js":"iZPqD","core-js/modules/es.math.trunc.js":"dHL9U","core-js/modules/es.number.constructor.js":"gOch3","core-js/modules/es.number.epsilon.js":"a1xdL","core-js/modules/es.number.is-integer.js":"dXYT2","core-js/modules/es.number.is-safe-integer.js":"j6Bh6","core-js/modules/es.number.max-safe-integer.js":"7rrlT","core-js/modules/es.number.min-safe-integer.js":"ctaxb","core-js/modules/es.number.parse-float.js":"20PVR","core-js/modules/es.number.parse-int.js":"1HONd","core-js/modules/es.object.assign.js":"8A7D1","core-js/modules/es.object.define-getter.js":"eNtVm","core-js/modules/es.object.define-properties.js":"hut41","core-js/modules/es.object.define-property.js":"2bZ6G","core-js/modules/es.object.define-setter.js":"kFOOA","core-js/modules/es.object.entries.js":"ZGjWv","core-js/modules/es.object.freeze.js":"8M81m","core-js/modules/es.object.from-entries.js":"4VjRy","core-js/modules/es.object.get-own-property-descriptor.js":"5sSNV","core-js/modules/es.object.get-own-property-descriptors.js":"bPpwC","core-js/modules/es.object.get-own-property-names.js":"3tqdq","core-js/modules/es.object.get-prototype-of.js":"fivNL","core-js/modules/es.object.is-extensible.js":"3crwL","core-js/modules/es.object.is-frozen.js":"7FSzR","core-js/modules/es.object.is-sealed.js":"2sQvw","core-js/modules/es.object.keys.js":"jyKJB","core-js/modules/es.object.lookup-getter.js":"85GeP","core-js/modules/es.object.lookup-setter.js":"jUABO","core-js/modules/es.object.prevent-extensions.js":"drbQJ","core-js/modules/es.object.seal.js":"2qCeI","core-js/modules/es.object.set-prototype-of.js":"5T7yg","core-js/modules/es.object.to-string.js":"8nFRu","core-js/modules/es.object.values.js":"69hf0","core-js/modules/es.parse-float.js":"1mjF5","core-js/modules/es.parse-int.js":"l5b3J","core-js/modules/es.promise.js":"b7wyz","core-js/modules/es.promise.finally.js":"kjQa6","core-js/modules/es.reflect.apply.js":"459bf","core-js/modules/es.reflect.construct.js":"5p367","core-js/modules/es.reflect.define-property.js":"6amgG","core-js/modules/es.reflect.delete-property.js":"7ziTV","core-js/modules/es.reflect.get.js":"4lblA","core-js/modules/es.reflect.get-own-property-descriptor.js":"6XboF","core-js/modules/es.reflect.get-prototype-of.js":"cauNy","core-js/modules/es.reflect.has.js":"2xx6i","core-js/modules/es.reflect.is-extensible.js":"iYnhL","core-js/modules/es.reflect.own-keys.js":"fiFO6","core-js/modules/es.reflect.prevent-extensions.js":"3NZwH","core-js/modules/es.reflect.set.js":"4ttQD","core-js/modules/es.reflect.set-prototype-of.js":"haCVw","core-js/modules/es.regexp.constructor.js":"aMiO2","core-js/modules/es.regexp.exec.js":"8GLaL","core-js/modules/es.regexp.flags.js":"6ntvp","core-js/modules/es.regexp.to-string.js":"9WSrH","core-js/modules/es.set.js":"bkZx6","core-js/modules/es.string.code-point-at.js":"eFUXN","core-js/modules/es.string.ends-with.js":"jlRRV","core-js/modules/es.string.from-code-point.js":"8dzdG","core-js/modules/es.string.includes.js":"fbLIU","core-js/modules/es.string.iterator.js":"efGNi","core-js/modules/es.string.match.js":"7JswF","core-js/modules/es.string.pad-end.js":"hTO41","core-js/modules/es.string.pad-start.js":"aRs3l","core-js/modules/es.string.raw.js":"fsNzV","core-js/modules/es.string.repeat.js":"d9VxP","core-js/modules/es.string.replace.js":"3dPVu","core-js/modules/es.string.search.js":"j0kVu","core-js/modules/es.string.split.js":"dTeue","core-js/modules/es.string.starts-with.js":"bZMEQ","core-js/modules/es.string.trim.js":"9mNsu","core-js/modules/es.string.trim-end.js":"lwHtl","core-js/modules/es.string.trim-start.js":"d19Tk","core-js/modules/es.typed-array.float32-array.js":"7QyjU","core-js/modules/es.typed-array.float64-array.js":"fPHSb","core-js/modules/es.typed-array.int8-array.js":"7euH4","core-js/modules/es.typed-array.int16-array.js":"7OtnL","core-js/modules/es.typed-array.int32-array.js":"abnJN","core-js/modules/es.typed-array.uint8-array.js":"7FphC","core-js/modules/es.typed-array.uint8-clamped-array.js":"81bsh","core-js/modules/es.typed-array.uint16-array.js":"41Nm9","core-js/modules/es.typed-array.uint32-array.js":"9Utrr","core-js/modules/es.typed-array.copy-within.js":"hjzWK","core-js/modules/es.typed-array.every.js":"f6pKr","core-js/modules/es.typed-array.fill.js":"kZHvq","core-js/modules/es.typed-array.filter.js":"SkuGK","core-js/modules/es.typed-array.find.js":"gAg8F","core-js/modules/es.typed-array.find-index.js":"ldOPB","core-js/modules/es.typed-array.for-each.js":"erHQw","core-js/modules/es.typed-array.from.js":"lMq2D","core-js/modules/es.typed-array.includes.js":"kwi1H","core-js/modules/es.typed-array.index-of.js":"lSi5i","core-js/modules/es.typed-array.iterator.js":"ivRTU","core-js/modules/es.typed-array.join.js":"k9wfb","core-js/modules/es.typed-array.last-index-of.js":"cH7gK","core-js/modules/es.typed-array.map.js":"bqhcK","core-js/modules/es.typed-array.of.js":"aGvtF","core-js/modules/es.typed-array.reduce.js":"d7pHY","core-js/modules/es.typed-array.reduce-right.js":"68CMs","core-js/modules/es.typed-array.reverse.js":"geW5Q","core-js/modules/es.typed-array.set.js":"hA0Fq","core-js/modules/es.typed-array.slice.js":"5gOQa","core-js/modules/es.typed-array.some.js":"1WFP9","core-js/modules/es.typed-array.sort.js":"f4Zy4","core-js/modules/es.typed-array.to-locale-string.js":"k4Cuj","core-js/modules/es.typed-array.to-string.js":"br3Pl","core-js/modules/es.weak-map.js":"4yZDl","core-js/modules/es.weak-set.js":"767Bx","core-js/modules/esnext.aggregate-error.js":"7faGZ","core-js/modules/esnext.global-this.js":"85gia","core-js/modules/esnext.promise.all-settled.js":"4p029","core-js/modules/esnext.promise.any.js":"4LHn1","core-js/modules/esnext.string.match-all.js":"dL3rU","core-js/modules/esnext.string.replace-all.js":"ewBaK","core-js/modules/esnext.symbol.dispose.js":"fLC1u","core-js/modules/web.dom-collections.for-each.js":"dqGR0","core-js/modules/web.dom-collections.iterator.js":"25IM7","core-js/modules/web.immediate.js":"22acx","core-js/modules/web.queue-microtask.js":"lg4Qc","core-js/modules/web.url.js":"lkPwL","core-js/modules/web.url.to-json.js":"7QnbR","core-js/modules/web.url-search-params.js":"1qDcB","regenerator-runtime/runtime":"gwp18","./model":"3mAOI","./views/recipeView":"ah8UK","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS","./views/searchView":"8Iknt","./views/resultsView":"5c7S5"}],"5i5pn":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require("9907e25c4a0aca96");
 require("6ca7b218a3c5142b");
@@ -14236,12 +14282,19 @@ parcelHelpers.export(exports, "state", function() {
 parcelHelpers.export(exports, "loadRecipe", function() {
     return loadRecipe;
 });
+parcelHelpers.export(exports, "loadSearchResults", function() {
+    return loadSearchResults;
+});
 var _asyncToGenerator = require("@swc/helpers/_/_async_to_generator");
 var _tsGenerator = require("@swc/helpers/_/_ts_generator");
 var _config = require("./config");
 var _helpers = require("./helpers");
 var state = {
-    recipe: {}
+    recipe: {},
+    search: {
+        query: "",
+        results: []
+    }
 };
 var loadRecipe = function() {
     var _ref = (0, _asyncToGenerator._)(function(id) {
@@ -14287,6 +14340,52 @@ var loadRecipe = function() {
         });
     });
     return function loadRecipe(id) {
+        return _ref.apply(this, arguments);
+    };
+}();
+var loadSearchResults = function() {
+    var _ref = (0, _asyncToGenerator._)(function(query) {
+        var data, error;
+        return (0, _tsGenerator._)(this, function(_state) {
+            switch(_state.label){
+                case 0:
+                    _state.trys.push([
+                        0,
+                        2,
+                        ,
+                        3
+                    ]);
+                    state.search.query = query;
+                    return [
+                        4,
+                        (0, _helpers.getJSON)("".concat((0, _config.API_URL), "?search=").concat(query))
+                    ];
+                case 1:
+                    data = _state.sent();
+                    state.search.results = data.data.recipes.map(function(rec) {
+                        return {
+                            id: rec.id,
+                            publisher: rec.publisher,
+                            image: rec.image_url,
+                            title: rec.title
+                        };
+                    });
+                    console.log(state.search.results);
+                    return [
+                        3,
+                        3
+                    ];
+                case 2:
+                    error = _state.sent();
+                    throw error;
+                case 3:
+                    return [
+                        2
+                    ];
+            }
+        });
+    });
+    return function loadSearchResults(query) {
         return _ref.apply(this, arguments);
     };
 }();
@@ -14364,63 +14463,30 @@ var getJSON = function() {
 },{"@swc/helpers/_/_async_to_generator":"5Aj3n","@swc/helpers/_/_ts_generator":"6WJcv","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"ah8UK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+var _assertThisInitialized = require("@swc/helpers/_/_assert_this_initialized");
 var _classCallCheck = require("@swc/helpers/_/_class_call_check");
-var _classPrivateFieldGet = require("@swc/helpers/_/_class_private_field_get");
-var _classPrivateFieldInit = require("@swc/helpers/_/_class_private_field_init");
-var _classPrivateFieldSet = require("@swc/helpers/_/_class_private_field_set");
-var _classPrivateMethodGet = require("@swc/helpers/_/_class_private_method_get");
-var _classPrivateMethodInit = require("@swc/helpers/_/_class_private_method_init");
 var _createClass = require("@swc/helpers/_/_create_class");
+var _defineProperty = require("@swc/helpers/_/_define_property");
+var _inherits = require("@swc/helpers/_/_inherits");
+var _createSuper = require("@swc/helpers/_/_create_super");
 var _iconsSvg = require("../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 var _fractional = require("fractional");
-var _parentEl = /*#__PURE__*/ new WeakMap(), _data = /*#__PURE__*/ new WeakMap(), _errorMessage = /*#__PURE__*/ new WeakMap(), _clear = /*#__PURE__*/ new WeakSet(), _generateMarkup = /*#__PURE__*/ new WeakSet();
-var RecipeView = /*#__PURE__*/ function() {
+var _view = require("./View");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+var RecipeView = /*#__PURE__*/ function(View) {
     "use strict";
+    (0, _inherits._)(RecipeView, View);
+    var _super = (0, _createSuper._)(RecipeView);
     function RecipeView() {
         (0, _classCallCheck._)(this, RecipeView);
-        (0, _classPrivateMethodInit._)(this, _clear);
-        (0, _classPrivateMethodInit._)(this, _generateMarkup);
-        (0, _classPrivateFieldInit._)(this, _parentEl, {
-            writable: true,
-            value: document.querySelector(".recipe")
-        });
-        (0, _classPrivateFieldInit._)(this, _data, {
-            writable: true,
-            value: void 0
-        });
-        (0, _classPrivateFieldInit._)(this, _errorMessage, {
-            writable: true,
-            value: "We could not find that recipe. Please try another one!"
-        });
+        var _this;
+        _this = _super.apply(this, arguments);
+        (0, _defineProperty._)((0, _assertThisInitialized._)(_this), "_parentEl", document.querySelector(".recipe"));
+        (0, _defineProperty._)((0, _assertThisInitialized._)(_this), "_errorMessage", "We could not find that recipe. Please try another one!");
+        return _this;
     }
     (0, _createClass._)(RecipeView, [
-        {
-            key: "render",
-            value: function render(data) {
-                (0, _classPrivateFieldSet._)(this, _data, data);
-                var markup = (0, _classPrivateMethodGet._)(this, _generateMarkup, generateMarkup).call(this);
-                (0, _classPrivateMethodGet._)(this, _clear, clear).call(this);
-                (0, _classPrivateFieldGet._)(this, _parentEl).insertAdjacentHTML("afterbegin", markup);
-            }
-        },
-        {
-            key: "renderSpinner",
-            value: function renderSpinner() {
-                var markup = '\n            <div class="spinner">\n              <svg>\n                <use href="'.concat((0, _iconsSvgDefault.default), '#icon-loader"></use>\n              </svg>\n            </div>');
-                (0, _classPrivateMethodGet._)(this, _clear, clear).call(this);
-                (0, _classPrivateFieldGet._)(this, _parentEl).insertAdjacentHTML("afterbegin", markup);
-            }
-        },
-        {
-            key: "renderError",
-            value: function renderError() {
-                var message = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : (0, _classPrivateFieldGet._)(this, _errorMessage);
-                var markup = '\n    <div class="error">\n     <div>\n      <svg>\n        <use href="'.concat((0, _iconsSvgDefault.default), '#icon-alert-triangle"></use>\n      </svg>\n     </div>\n    <p>').concat(message, "</p>\n  </div> ");
-                (0, _classPrivateMethodGet._)(this, _clear, clear).call(this);
-                (0, _classPrivateFieldGet._)(this, _parentEl).insertAdjacentHTML("afterbegin", markup);
-            }
-        },
         {
             key: "addHandlerRender",
             value: function addHandlerRender(handler) {
@@ -14431,21 +14497,21 @@ var RecipeView = /*#__PURE__*/ function() {
                     return window.addEventListener(ev, handler);
                 });
             }
+        },
+        {
+            key: "_generateMarkup",
+            value: function _generateMarkup() {
+                return ' <figure class="recipe__fig">\n        <img src="'.concat(this._data.image, '" alt="').concat(this._data.title, '" class="recipe__img" />\n        <h1 class="recipe__title">\n          <span>').concat(this._data.title, '</span>\n        </h1>\n      </figure>\n\n      <div class="recipe__details">\n        // <div class="recipe__info">\n          <svg class="recipe__info-icon">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-clock"></use>\n          </svg>\n          <span class="recipe__info-data recipe__info-data--minutes">').concat(this._data.cookingTime, '</span>\n          <span class="recipe__info-text">minutes</span>\n        </div>\n        <div class="recipe__info">\n          <svg class="recipe__info-icon">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-users"></use>\n          </svg>\n          <span class="recipe__info-data recipe__info-data--people">').concat(this._data.servings, '</span>\n          <span class="recipe__info-text">servings</span>\n\n          <div class="recipe__info-buttons">\n            <button class="btn--tiny btn--increase-servings">\n              <svg>\n                <use href="').concat((0, _iconsSvgDefault.default), '#icon-minus-circle"></use>\n              </svg>\n            </button>\n            <button class="btn--tiny btn--increase-servings">\n              <svg>\n                <use href="').concat((0, _iconsSvgDefault.default), '#icon-plus-circle"></use>\n              </svg>\n            </button>\n          </div>\n        </div>\n\n        <div class="recipe__user-generated">\n        </div>\n        <button class="btn--round">\n          <svg class="">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-bookmark-fill"></use>\n          </svg>\n        </button>\n      </div>\n\n      <div class="recipe__ingredients">\n        <h2 class="heading--2">Recipe ingredients</h2>\n        <ul class="recipe__ingredient-list">\n        ').concat(this._data.ingredients.map(function(ing) {
+                    return ' \n           <li class="recipe__ingredient">\n            <svg class="recipe__icon">\n              <use href="'.concat((0, _iconsSvgDefault.default), '#icon-check"></use>\n            </svg>\n            <div class="recipe__quantity">').concat(ing.quantity ? new (0, _fractional.Fraction)(ing.quantity).toString() : "", '</div>\n            <div class="recipe__description">\n              <span class="recipe__unit">').concat(ing.unit, "</span>\n              ").concat(ing.description, "\n            </div>\n          </li>");
+                }).join(""), '\n      </div>\n\n      <div class="recipe__directions">\n        <h2 class="heading--2">How to cook it</h2>\n        <p class="recipe__directions-text">\n          This recipe was carefully designed and tested by\n          <span class="recipe__publisher">').concat(this._data.publisher, '</span>. Please check out\n          directions at their website.\n        </p>\n        <a\n          class="btn--small recipe__btn"\n          href="').concat(this._data.sourceUrl, '"\n          target="_blank"\n        >\n          <span>Directions</span>\n          <svg class="search__icon">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-arrow-right"></use>\n          </svg>\n        </a>\n      </div>');
+            }
         }
     ]);
     return RecipeView;
-}();
-function clear() {
-    (0, _classPrivateFieldGet._)(this, _parentEl).innerHTML = "";
-}
-function generateMarkup() {
-    return ' <figure class="recipe__fig">\n        <img src="'.concat((0, _classPrivateFieldGet._)(this, _data).image, '" alt="').concat((0, _classPrivateFieldGet._)(this, _data).title, '" class="recipe__img" />\n        <h1 class="recipe__title">\n          <span>').concat((0, _classPrivateFieldGet._)(this, _data).title, '</span>\n        </h1>\n      </figure>\n\n      <div class="recipe__details">\n        // <div class="recipe__info">\n          <svg class="recipe__info-icon">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-clock"></use>\n          </svg>\n          <span class="recipe__info-data recipe__info-data--minutes">').concat((0, _classPrivateFieldGet._)(this, _data).cookingTime, '</span>\n          <span class="recipe__info-text">minutes</span>\n        </div>\n        <div class="recipe__info">\n          <svg class="recipe__info-icon">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-users"></use>\n          </svg>\n          <span class="recipe__info-data recipe__info-data--people">').concat((0, _classPrivateFieldGet._)(this, _data).servings, '</span>\n          <span class="recipe__info-text">servings</span>\n\n          <div class="recipe__info-buttons">\n            <button class="btn--tiny btn--increase-servings">\n              <svg>\n                <use href="').concat((0, _iconsSvgDefault.default), '#icon-minus-circle"></use>\n              </svg>\n            </button>\n            <button class="btn--tiny btn--increase-servings">\n              <svg>\n                <use href="').concat((0, _iconsSvgDefault.default), '#icon-plus-circle"></use>\n              </svg>\n            </button>\n          </div>\n        </div>\n\n        <div class="recipe__user-generated">\n          <svg>\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-user"></use>\n          </svg>\n        </div>\n        <button class="btn--round">\n          <svg class="">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-bookmark-fill"></use>\n          </svg>\n        </button>\n      </div>\n\n      <div class="recipe__ingredients">\n        <h2 class="heading--2">Recipe ingredients</h2>\n        <ul class="recipe__ingredient-list">\n        ').concat((0, _classPrivateFieldGet._)(this, _data).ingredients.map(function(ing) {
-        return ' \n           <li class="recipe__ingredient">\n            <svg class="recipe__icon">\n              <use href="'.concat((0, _iconsSvgDefault.default), '#icon-check"></use>\n            </svg>\n            <div class="recipe__quantity">').concat(ing.quantity ? new (0, _fractional.Fraction)(ing.quantity).toString() : "", '</div>\n            <div class="recipe__description">\n              <span class="recipe__unit">').concat(ing.unit, "</span>\n              ").concat(ing.description, "\n            </div>\n          </li>");
-    }).join(""), '\n      </div>\n\n      <div class="recipe__directions">\n        <h2 class="heading--2">How to cook it</h2>\n        <p class="recipe__directions-text">\n          This recipe was carefully designed and tested by\n          <span class="recipe__publisher">').concat((0, _classPrivateFieldGet._)(this, _data).publisher, '</span>. Please check out\n          directions at their website.\n        </p>\n        <a\n          class="btn--small recipe__btn"\n          href="').concat((0, _classPrivateFieldGet._)(this, _data).sourceUrl, '"\n          target="_blank"\n        >\n          <span>Directions</span>\n          <svg class="search__icon">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-arrow-right"></use>\n          </svg>\n        </a>\n      </div>');
-}
+}((0, _viewDefault.default));
 exports.default = new RecipeView();
 
-},{"@swc/helpers/_/_class_call_check":"8rnHD","@swc/helpers/_/_class_private_field_get":"gHJlk","@swc/helpers/_/_class_private_field_init":"cUv9G","@swc/helpers/_/_class_private_field_set":"b0Al4","@swc/helpers/_/_class_private_method_get":"jFAfY","@swc/helpers/_/_class_private_method_init":"jAygc","@swc/helpers/_/_create_class":"1GKMK","../../img/icons.svg":"3FuW9","fractional":"gSuOV","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"8rnHD":[function(require,module,exports) {
+},{"@swc/helpers/_/_class_call_check":"8rnHD","@swc/helpers/_/_create_class":"1GKMK","../../img/icons.svg":"3FuW9","fractional":"gSuOV","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS","@swc/helpers/_/_assert_this_initialized":"gv4b9","@swc/helpers/_/_define_property":"6IkiD","@swc/helpers/_/_inherits":"hpnTP","@swc/helpers/_/_create_super":"6lmZ7","./View":"aHWnV"}],"8rnHD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "_class_call_check", function() {
@@ -14458,145 +14524,7 @@ function _class_call_check(instance, Constructor) {
     if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"gHJlk":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_class_private_field_get", function() {
-    return _class_private_field_get;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _class_private_field_get;
-});
-var _classApplyDescriptorGetJs = require("./_class_apply_descriptor_get.js");
-var _classExtractFieldDescriptorJs = require("./_class_extract_field_descriptor.js");
-function _class_private_field_get(receiver, privateMap) {
-    var descriptor = (0, _classExtractFieldDescriptorJs._class_extract_field_descriptor)(receiver, privateMap, "get");
-    return (0, _classApplyDescriptorGetJs._class_apply_descriptor_get)(receiver, descriptor);
-}
-
-},{"./_class_apply_descriptor_get.js":"bpjbP","./_class_extract_field_descriptor.js":"9TLff","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"bpjbP":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_class_apply_descriptor_get", function() {
-    return _class_apply_descriptor_get;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _class_apply_descriptor_get;
-});
-function _class_apply_descriptor_get(receiver, descriptor) {
-    if (descriptor.get) return descriptor.get.call(receiver);
-    return descriptor.value;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"9TLff":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_class_extract_field_descriptor", function() {
-    return _class_extract_field_descriptor;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _class_extract_field_descriptor;
-});
-function _class_extract_field_descriptor(receiver, privateMap, action) {
-    if (!privateMap.has(receiver)) throw new TypeError("attempted to " + action + " private field on non-instance");
-    return privateMap.get(receiver);
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"cUv9G":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_class_private_field_init", function() {
-    return _class_private_field_init;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _class_private_field_init;
-});
-var _checkPrivateRedeclarationJs = require("./_check_private_redeclaration.js");
-function _class_private_field_init(obj, privateMap, value) {
-    (0, _checkPrivateRedeclarationJs._check_private_redeclaration)(obj, privateMap);
-    privateMap.set(obj, value);
-}
-
-},{"./_check_private_redeclaration.js":"aG7Fz","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"aG7Fz":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_check_private_redeclaration", function() {
-    return _check_private_redeclaration;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _check_private_redeclaration;
-});
-function _check_private_redeclaration(obj, privateCollection) {
-    if (privateCollection.has(obj)) throw new TypeError("Cannot initialize the same private elements twice on an object");
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"b0Al4":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_class_private_field_set", function() {
-    return _class_private_field_set;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _class_private_field_set;
-});
-var _classApplyDescriptorSetJs = require("./_class_apply_descriptor_set.js");
-var _classExtractFieldDescriptorJs = require("./_class_extract_field_descriptor.js");
-function _class_private_field_set(receiver, privateMap, value) {
-    var descriptor = (0, _classExtractFieldDescriptorJs._class_extract_field_descriptor)(receiver, privateMap, "set");
-    (0, _classApplyDescriptorSetJs._class_apply_descriptor_set)(receiver, descriptor, value);
-    return value;
-}
-
-},{"./_class_apply_descriptor_set.js":"lBeaX","./_class_extract_field_descriptor.js":"9TLff","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"lBeaX":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_class_apply_descriptor_set", function() {
-    return _class_apply_descriptor_set;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _class_apply_descriptor_set;
-});
-function _class_apply_descriptor_set(receiver, descriptor, value) {
-    if (descriptor.set) descriptor.set.call(receiver, value);
-    else {
-        if (!descriptor.writable) // This should only throw in strict mode, but class bodies are
-        // always strict and private fields can only be used inside
-        // class bodies.
-        throw new TypeError("attempted to set read only private field");
-        descriptor.value = value;
-    }
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"jFAfY":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_class_private_method_get", function() {
-    return _class_private_method_get;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _class_private_method_get;
-});
-function _class_private_method_get(receiver, privateSet, fn) {
-    if (!privateSet.has(receiver)) throw new TypeError("attempted to get private field on non-instance");
-    return fn;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"jAygc":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_class_private_method_init", function() {
-    return _class_private_method_init;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _class_private_method_init;
-});
-var _checkPrivateRedeclarationJs = require("./_check_private_redeclaration.js");
-function _class_private_method_init(obj, privateSet) {
-    (0, _checkPrivateRedeclarationJs._check_private_redeclaration)(obj, privateSet);
-    privateSet.add(obj);
-}
-
-},{"./_check_private_redeclaration.js":"aG7Fz","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"1GKMK":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"1GKMK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "_create_class", function() {
@@ -14911,6 +14839,402 @@ Fraction.primeFactors = function(n) {
 };
 module.exports.Fraction = Fraction;
 
-},{}]},["hCuLA","8F2RK"], "8F2RK", "parcelRequire7e89")
+},{}],"gv4b9":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_assert_this_initialized", function() {
+    return _assert_this_initialized;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _assert_this_initialized;
+});
+function _assert_this_initialized(self) {
+    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    return self;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"6IkiD":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_define_property", function() {
+    return _define_property;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _define_property;
+});
+function _define_property(obj, key, value) {
+    if (key in obj) Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+    });
+    else obj[key] = value;
+    return obj;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"hpnTP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_inherits", function() {
+    return _inherits;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _inherits;
+});
+var _setPrototypeOfJs = require("./_set_prototype_of.js");
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+            value: subClass,
+            writable: true,
+            configurable: true
+        }
+    });
+    if (superClass) (0, _setPrototypeOfJs._set_prototype_of)(subClass, superClass);
+}
+
+},{"./_set_prototype_of.js":"ggsnR","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"ggsnR":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_set_prototype_of", function() {
+    return _set_prototype_of;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _set_prototype_of;
+});
+function _set_prototype_of(o, p) {
+    _set_prototype_of = Object.setPrototypeOf || function setPrototypeOf(o, p) {
+        o.__proto__ = p;
+        return o;
+    };
+    return _set_prototype_of(o, p);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"6lmZ7":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_create_super", function() {
+    return _create_super;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _create_super;
+});
+var _getPrototypeOfJs = require("./_get_prototype_of.js");
+var _isNativeReflectConstructJs = require("./_is_native_reflect_construct.js");
+var _possibleConstructorReturnJs = require("./_possible_constructor_return.js");
+function _create_super(Derived) {
+    var hasNativeReflectConstruct = (0, _isNativeReflectConstructJs._is_native_reflect_construct)();
+    return function _createSuperInternal() {
+        var Super = (0, _getPrototypeOfJs._get_prototype_of)(Derived), result;
+        if (hasNativeReflectConstruct) {
+            var NewTarget = (0, _getPrototypeOfJs._get_prototype_of)(this).constructor;
+            result = Reflect.construct(Super, arguments, NewTarget);
+        } else result = Super.apply(this, arguments);
+        return (0, _possibleConstructorReturnJs._possible_constructor_return)(this, result);
+    };
+}
+
+},{"./_get_prototype_of.js":"aJfix","./_is_native_reflect_construct.js":"hQVlV","./_possible_constructor_return.js":"jw7MX","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"aJfix":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_get_prototype_of", function() {
+    return _get_prototype_of;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _get_prototype_of;
+});
+function _get_prototype_of(o) {
+    _get_prototype_of = Object.setPrototypeOf ? Object.getPrototypeOf : function getPrototypeOf(o) {
+        return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _get_prototype_of(o);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"hQVlV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_is_native_reflect_construct", function() {
+    return _is_native_reflect_construct;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _is_native_reflect_construct;
+});
+function _is_native_reflect_construct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+    try {
+        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"jw7MX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_possible_constructor_return", function() {
+    return _possible_constructor_return;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _possible_constructor_return;
+});
+var _assertThisInitializedJs = require("./_assert_this_initialized.js");
+var _typeOfJs = require("./_type_of.js");
+function _possible_constructor_return(self, call) {
+    if (call && ((0, _typeOfJs._type_of)(call) === "object" || typeof call === "function")) return call;
+    return (0, _assertThisInitializedJs._assert_this_initialized)(self);
+}
+
+},{"./_assert_this_initialized.js":"gv4b9","./_type_of.js":"it86L","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"aHWnV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", function() {
+    return View;
+});
+var _classCallCheck = require("@swc/helpers/_/_class_call_check");
+var _createClass = require("@swc/helpers/_/_create_class");
+var _defineProperty = require("@swc/helpers/_/_define_property");
+var _iconsSvg = require("../../img/icons.svg");
+var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
+var View = /*#__PURE__*/ function() {
+    "use strict";
+    function View() {
+        (0, _classCallCheck._)(this, View);
+        (0, _defineProperty._)(this, "_data", void 0);
+    }
+    (0, _createClass._)(View, [
+        {
+            key: "render",
+            value: function render(data) {
+                if (!data || data.length === 0) return this._renderError();
+                this._data = data;
+                var markup = this._generateMarkup();
+                this._clear();
+                this._parentEl.insertAdjacentHTML("afterbegin", markup);
+            }
+        },
+        {
+            key: "_clear",
+            value: function _clear() {
+                this._parentEl.innerHTML = "";
+            }
+        },
+        {
+            key: "renderSpinner",
+            value: function renderSpinner() {
+                var markup = '\n            <div class="spinner">\n              <svg>\n                <use href="'.concat((0, _iconsSvgDefault.default), '#icon-loader"></use>\n              </svg>\n            </div>');
+                this._clear();
+                this._parentEl.insertAdjacentHTML("afterbegin", markup);
+            }
+        },
+        {
+            key: "_renderError",
+            value: function _renderError() {
+                var message = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : this._errorMessage;
+                var markup = '\n    <div class="error">\n     <div>\n      <svg>\n        <use href="'.concat((0, _iconsSvgDefault.default), '#icon-alert-triangle"></use>\n      </svg>\n     </div>\n    <p>').concat(message, "</p>\n  </div> ");
+                this._clear();
+                this._parentEl.insertAdjacentHTML("afterbegin", markup);
+            }
+        }
+    ]);
+    return View;
+}();
+
+},{"@swc/helpers/_/_class_call_check":"8rnHD","@swc/helpers/_/_create_class":"1GKMK","@swc/helpers/_/_define_property":"6IkiD","../../img/icons.svg":"3FuW9","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"8Iknt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _classCallCheck = require("@swc/helpers/_/_class_call_check");
+var _classPrivateFieldGet = require("@swc/helpers/_/_class_private_field_get");
+var _classPrivateFieldInit = require("@swc/helpers/_/_class_private_field_init");
+var _classPrivateMethodGet = require("@swc/helpers/_/_class_private_method_get");
+var _classPrivateMethodInit = require("@swc/helpers/_/_class_private_method_init");
+var _createClass = require("@swc/helpers/_/_create_class");
+var _parentEl = /*#__PURE__*/ new WeakMap(), _clearInput = /*#__PURE__*/ new WeakSet();
+var SearchView = /*#__PURE__*/ function() {
+    "use strict";
+    function SearchView() {
+        (0, _classCallCheck._)(this, SearchView);
+        (0, _classPrivateMethodInit._)(this, _clearInput);
+        (0, _classPrivateFieldInit._)(this, _parentEl, {
+            writable: true,
+            value: document.querySelector(".search")
+        });
+    }
+    (0, _createClass._)(SearchView, [
+        {
+            key: "getQuery",
+            value: function getQuery() {
+                var query = (0, _classPrivateFieldGet._)(this, _parentEl).querySelector(".search__field").value;
+                (0, _classPrivateMethodGet._)(this, _clearInput, clearInput).call(this);
+                return query;
+            }
+        },
+        {
+            key: "addHandlerSearch",
+            value: function addHandlerSearch(handler) {
+                (0, _classPrivateFieldGet._)(this, _parentEl).addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    handler();
+                });
+            }
+        }
+    ]);
+    return SearchView;
+}();
+function clearInput() {
+    (0, _classPrivateFieldGet._)(this, _parentEl).querySelector(".search__field").value = "";
+}
+exports.default = new SearchView();
+
+},{"@swc/helpers/_/_class_call_check":"8rnHD","@swc/helpers/_/_class_private_field_get":"gHJlk","@swc/helpers/_/_class_private_field_init":"cUv9G","@swc/helpers/_/_create_class":"1GKMK","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS","@swc/helpers/_/_class_private_method_init":"jAygc","@swc/helpers/_/_class_private_method_get":"jFAfY"}],"gHJlk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_class_private_field_get", function() {
+    return _class_private_field_get;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _class_private_field_get;
+});
+var _classApplyDescriptorGetJs = require("./_class_apply_descriptor_get.js");
+var _classExtractFieldDescriptorJs = require("./_class_extract_field_descriptor.js");
+function _class_private_field_get(receiver, privateMap) {
+    var descriptor = (0, _classExtractFieldDescriptorJs._class_extract_field_descriptor)(receiver, privateMap, "get");
+    return (0, _classApplyDescriptorGetJs._class_apply_descriptor_get)(receiver, descriptor);
+}
+
+},{"./_class_apply_descriptor_get.js":"bpjbP","./_class_extract_field_descriptor.js":"9TLff","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"bpjbP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_class_apply_descriptor_get", function() {
+    return _class_apply_descriptor_get;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _class_apply_descriptor_get;
+});
+function _class_apply_descriptor_get(receiver, descriptor) {
+    if (descriptor.get) return descriptor.get.call(receiver);
+    return descriptor.value;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"9TLff":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_class_extract_field_descriptor", function() {
+    return _class_extract_field_descriptor;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _class_extract_field_descriptor;
+});
+function _class_extract_field_descriptor(receiver, privateMap, action) {
+    if (!privateMap.has(receiver)) throw new TypeError("attempted to " + action + " private field on non-instance");
+    return privateMap.get(receiver);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"cUv9G":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_class_private_field_init", function() {
+    return _class_private_field_init;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _class_private_field_init;
+});
+var _checkPrivateRedeclarationJs = require("./_check_private_redeclaration.js");
+function _class_private_field_init(obj, privateMap, value) {
+    (0, _checkPrivateRedeclarationJs._check_private_redeclaration)(obj, privateMap);
+    privateMap.set(obj, value);
+}
+
+},{"./_check_private_redeclaration.js":"aG7Fz","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"aG7Fz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_check_private_redeclaration", function() {
+    return _check_private_redeclaration;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _check_private_redeclaration;
+});
+function _check_private_redeclaration(obj, privateCollection) {
+    if (privateCollection.has(obj)) throw new TypeError("Cannot initialize the same private elements twice on an object");
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"jAygc":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_class_private_method_init", function() {
+    return _class_private_method_init;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _class_private_method_init;
+});
+var _checkPrivateRedeclarationJs = require("./_check_private_redeclaration.js");
+function _class_private_method_init(obj, privateSet) {
+    (0, _checkPrivateRedeclarationJs._check_private_redeclaration)(obj, privateSet);
+    privateSet.add(obj);
+}
+
+},{"./_check_private_redeclaration.js":"aG7Fz","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"jFAfY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_class_private_method_get", function() {
+    return _class_private_method_get;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _class_private_method_get;
+});
+function _class_private_method_get(receiver, privateSet, fn) {
+    if (!privateSet.has(receiver)) throw new TypeError("attempted to get private field on non-instance");
+    return fn;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"5c7S5":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _assertThisInitialized = require("@swc/helpers/_/_assert_this_initialized");
+var _classCallCheck = require("@swc/helpers/_/_class_call_check");
+var _createClass = require("@swc/helpers/_/_create_class");
+var _defineProperty = require("@swc/helpers/_/_define_property");
+var _inherits = require("@swc/helpers/_/_inherits");
+var _createSuper = require("@swc/helpers/_/_create_super");
+var _iconsSvg = require("../../img/icons.svg");
+var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
+var _view = require("./View");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+var ResultsView = /*#__PURE__*/ function(View) {
+    "use strict";
+    (0, _inherits._)(ResultsView, View);
+    var _super = (0, _createSuper._)(ResultsView);
+    function ResultsView() {
+        (0, _classCallCheck._)(this, ResultsView);
+        var _this;
+        _this = _super.apply(this, arguments);
+        (0, _defineProperty._)((0, _assertThisInitialized._)(_this), "_parentEl", document.querySelector(".results"));
+        (0, _defineProperty._)((0, _assertThisInitialized._)(_this), "_errorMessage", "We could not find that recipe. Please try another one!");
+        return _this;
+    }
+    (0, _createClass._)(ResultsView, [
+        {
+            key: "_generateMarkup",
+            value: function _generateMarkup() {
+                console.log(this._data);
+                return this._data.map(this._generateMarkupPreview).join("");
+            }
+        },
+        {
+            key: "_generateMarkupPreview",
+            value: function _generateMarkupPreview(results) {
+                return '  \n        <li class="preview">\n            <a class="preview__link" href="#'.concat(results.id, '">\n               <figure class="preview__fig">\n                <img src="').concat(results.image, '" alt="').concat(results.title, '" />\n                </figure>\n                <div class="preview__data">\n                <h4 class="preview__title">').concat(results.title, '</h4>\n                <p class="preview__publisher">').concat(results.publisher, "</p>\n            </div>\n            </a>\n      </li>");
+            }
+        }
+    ]);
+    return ResultsView;
+}((0, _viewDefault.default));
+exports.default = new ResultsView();
+
+},{"@swc/helpers/_/_assert_this_initialized":"gv4b9","@swc/helpers/_/_class_call_check":"8rnHD","@swc/helpers/_/_define_property":"6IkiD","@swc/helpers/_/_inherits":"hpnTP","@swc/helpers/_/_create_super":"6lmZ7","./View":"aHWnV","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS","@swc/helpers/_/_create_class":"1GKMK","../../img/icons.svg":"3FuW9"}]},["hCuLA","8F2RK"], "8F2RK", "parcelRequire7e89")
 
 //# sourceMappingURL=index.8602965e.js.map
