@@ -6,7 +6,6 @@ class ResultsView extends View {
 	_errorMessage = 'We could not find that recipe. Please try another one!'
 
 	_generateMarkup() {
-		console.log(this._data)
 		return this._data.map(this._generateMarkupPreview).join('')
 	}
 	_generateMarkupPreview(results) {
