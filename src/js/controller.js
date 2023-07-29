@@ -36,13 +36,24 @@ const controlSearchResults = async () => {
 }
 
 const controlPagination = goToPage => {
+	// 1) Render NEW Results
 	resultsView.render(model.getSearchResultsPage(goToPage))
+
+	// 2) Render NEW pagination buttons
 	paginationView.render(model.state.search)
+}
+
+const controlServings = newServings => {
+	// Update the recipe servings (in state)
+	model.updateServings(newServings)
+	// Update the recipe view
+	recipeView.render(model.state.recipe)
 }
 
 const init = () => {
 	recipeView.addHandlerRender(controlRecipes)
 	searchView.addHandlerSearch(controlSearchResults)
 	paginationView.addHandlerClick(controlPagination)
+	recipeView.addHandlerUpdateServings(controlServings)
 }
 init()
