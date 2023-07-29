@@ -14,7 +14,6 @@ class RecipeView extends View {
 		this._parentEl.addEventListener('click', e => {
 			const btn = e.target.closest('.btn--update-servings')
 			if (!btn) return
-			console.log(btn)
 			const updateTo = +btn.dataset.updateTo
 			if (updateTo > 0) handler(updateTo)
 		})
@@ -29,7 +28,7 @@ class RecipeView extends View {
       </figure>
 
       <div class="recipe__details">
-        // <div class="recipe__info">
+         <div class="recipe__info">
           <svg class="recipe__info-icon">
             <use href="${icons}#icon-clock"></use>
           </svg>

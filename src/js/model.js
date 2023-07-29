@@ -26,7 +26,6 @@ export const loadRecipe = async id => {
 			servings: recipe.servings,
 			cookingTime: recipe.cooking_time,
 		}
-		console.log(state.recipe)
 	} catch (error) {
 		throw error
 	}
