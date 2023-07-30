@@ -13,7 +13,7 @@ export default class View {
 	}
 
 	update(data) {
-		if (!data || data.length === 0) return this._renderError()
+	
 
 		this._data = data
 		const newMarkup = this._generateMarkup()

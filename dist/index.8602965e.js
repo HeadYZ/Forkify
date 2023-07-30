@@ -1637,6 +1637,8 @@ var _searchView = require("./views/searchView");
 var _searchViewDefault = parcelHelpers.interopDefault(_searchView);
 var _resultsView = require("./views/resultsView");
 var _resultsViewDefault = parcelHelpers.interopDefault(_resultsView);
+var _paginationView = require("./views/paginationView");
+var _paginationViewDefault = parcelHelpers.interopDefault(_paginationView);
 var controlRecipes = function() {
     var _ref = (0, _asyncToGenerator._)(function() {
         var id, err;
@@ -1654,6 +1656,7 @@ var controlRecipes = function() {
                         2
                     ];
                     (0, _recipeViewDefault.default).renderSpinner();
+                    (0, _resultsViewDefault.default).update(_model.getSearchResultsPage());
                     //1)) Loading recipe
                     return [
                         4,
@@ -1708,7 +1711,8 @@ var controlSearchResults = function() {
                     ];
                 case 1:
                     _state.sent();
-                    (0, _resultsViewDefault.default).render(_model.state.search.results);
+                    (0, _resultsViewDefault.default).render(_model.getSearchResultsPage());
+                    (0, _paginationViewDefault.default).render(_model.state.search);
                     return [
                         3,
                         3
@@ -1730,13 +1734,27 @@ var controlSearchResults = function() {
         return _ref.apply(this, arguments);
     };
 }();
+var controlPagination = function(goToPage) {
+    // 1) Render NEW Results
+    (0, _resultsViewDefault.default).render(_model.getSearchResultsPage(goToPage));
+    // 2) Render NEW pagination buttons
+    (0, _paginationViewDefault.default).render(_model.state.search);
+};
+var controlServings = function(newServings) {
+    // Update the recipe servings (in state)
+    _model.updateServings(newServings);
+    // Update the recipe view
+    (0, _recipeViewDefault.default).update(_model.state.recipe);
+};
 var init = function() {
     (0, _recipeViewDefault.default).addHandlerRender(controlRecipes);
     (0, _searchViewDefault.default).addHandlerSearch(controlSearchResults);
+    (0, _paginationViewDefault.default).addHandlerClick(controlPagination);
+    (0, _recipeViewDefault.default).addHandlerUpdateServings(controlServings);
 };
 init();
 
-},{"@swc/helpers/_/_async_to_generator":"5Aj3n","@swc/helpers/_/_ts_generator":"6WJcv","core-js/modules/es.symbol.js":"5i5pn","core-js/modules/es.symbol.description.js":"2y1hu","core-js/modules/es.symbol.async-iterator.js":"8hwx7","core-js/modules/es.symbol.has-instance.js":"kSpwA","core-js/modules/es.symbol.is-concat-spreadable.js":"aAuCK","core-js/modules/es.symbol.iterator.js":"6SrWX","core-js/modules/es.symbol.match.js":"j5cDp","core-js/modules/es.symbol.replace.js":"7A7O5","core-js/modules/es.symbol.search.js":"1OQjH","core-js/modules/es.symbol.species.js":"aDyhg","core-js/modules/es.symbol.split.js":"15gzF","core-js/modules/es.symbol.to-primitive.js":"2fUW5","core-js/modules/es.symbol.to-string-tag.js":"ewn9y","core-js/modules/es.symbol.unscopables.js":"51wuE","core-js/modules/es.array.concat.js":"6V5Yf","core-js/modules/es.array.copy-within.js":"kSNVt","core-js/modules/es.array.fill.js":"kVMX6","core-js/modules/es.array.filter.js":"eGF4B","core-js/modules/es.array.find.js":"8II9k","core-js/modules/es.array.find-index.js":"91R5f","core-js/modules/es.array.flat.js":"k4Uet","core-js/modules/es.array.flat-map.js":"eTbtK","core-js/modules/es.array.from.js":"kVMXz","core-js/modules/es.array.includes.js":"EohDV","core-js/modules/es.array.index-of.js":"9K7Ns","core-js/modules/es.array.iterator.js":"9477y","core-js/modules/es.array.last-index-of.js":"fBWw8","core-js/modules/es.array.map.js":"5UYQy","core-js/modules/es.array.of.js":"CFC6m","core-js/modules/es.array.reduce.js":"a362r","core-js/modules/es.array.reduce-right.js":"av3gR","core-js/modules/es.array.slice.js":"kDEwX","core-js/modules/es.array.sort.js":"hPvQb","core-js/modules/es.array.species.js":"dDREv","core-js/modules/es.array.splice.js":"dE14h","core-js/modules/es.array.unscopables.flat.js":"g2F5e","core-js/modules/es.array.unscopables.flat-map.js":"2wYsw","core-js/modules/es.date.to-primitive.js":"l0wQ9","core-js/modules/es.function.has-instance.js":"94DIL","core-js/modules/es.json.to-string-tag.js":"3HsCC","core-js/modules/es.map.js":"dD1Tk","core-js/modules/es.math.acosh.js":"3vW30","core-js/modules/es.math.asinh.js":"jxHgF","core-js/modules/es.math.atanh.js":"6Sjgi","core-js/modules/es.math.cbrt.js":"b8MkE","core-js/modules/es.math.clz32.js":"kOrye","core-js/modules/es.math.cosh.js":"kJwuN","core-js/modules/es.math.expm1.js":"bVrej","core-js/modules/es.math.fround.js":"liuh6","core-js/modules/es.math.hypot.js":"3rqos","core-js/modules/es.math.log10.js":"3stMG","core-js/modules/es.math.log1p.js":"8Sc6M","core-js/modules/es.math.log2.js":"d1LY4","core-js/modules/es.math.sign.js":"6GqCv","core-js/modules/es.math.sinh.js":"1Lh1l","core-js/modules/es.math.tanh.js":"ipDbE","core-js/modules/es.math.to-string-tag.js":"iZPqD","core-js/modules/es.math.trunc.js":"dHL9U","core-js/modules/es.number.constructor.js":"gOch3","core-js/modules/es.number.epsilon.js":"a1xdL","core-js/modules/es.number.is-integer.js":"dXYT2","core-js/modules/es.number.is-safe-integer.js":"j6Bh6","core-js/modules/es.number.max-safe-integer.js":"7rrlT","core-js/modules/es.number.min-safe-integer.js":"ctaxb","core-js/modules/es.number.parse-float.js":"20PVR","core-js/modules/es.number.parse-int.js":"1HONd","core-js/modules/es.object.assign.js":"8A7D1","core-js/modules/es.object.define-getter.js":"eNtVm","core-js/modules/es.object.define-properties.js":"hut41","core-js/modules/es.object.define-property.js":"2bZ6G","core-js/modules/es.object.define-setter.js":"kFOOA","core-js/modules/es.object.entries.js":"ZGjWv","core-js/modules/es.object.freeze.js":"8M81m","core-js/modules/es.object.from-entries.js":"4VjRy","core-js/modules/es.object.get-own-property-descriptor.js":"5sSNV","core-js/modules/es.object.get-own-property-descriptors.js":"bPpwC","core-js/modules/es.object.get-own-property-names.js":"3tqdq","core-js/modules/es.object.get-prototype-of.js":"fivNL","core-js/modules/es.object.is-extensible.js":"3crwL","core-js/modules/es.object.is-frozen.js":"7FSzR","core-js/modules/es.object.is-sealed.js":"2sQvw","core-js/modules/es.object.keys.js":"jyKJB","core-js/modules/es.object.lookup-getter.js":"85GeP","core-js/modules/es.object.lookup-setter.js":"jUABO","core-js/modules/es.object.prevent-extensions.js":"drbQJ","core-js/modules/es.object.seal.js":"2qCeI","core-js/modules/es.object.set-prototype-of.js":"5T7yg","core-js/modules/es.object.to-string.js":"8nFRu","core-js/modules/es.object.values.js":"69hf0","core-js/modules/es.parse-float.js":"1mjF5","core-js/modules/es.parse-int.js":"l5b3J","core-js/modules/es.promise.js":"b7wyz","core-js/modules/es.promise.finally.js":"kjQa6","core-js/modules/es.reflect.apply.js":"459bf","core-js/modules/es.reflect.construct.js":"5p367","core-js/modules/es.reflect.define-property.js":"6amgG","core-js/modules/es.reflect.delete-property.js":"7ziTV","core-js/modules/es.reflect.get.js":"4lblA","core-js/modules/es.reflect.get-own-property-descriptor.js":"6XboF","core-js/modules/es.reflect.get-prototype-of.js":"cauNy","core-js/modules/es.reflect.has.js":"2xx6i","core-js/modules/es.reflect.is-extensible.js":"iYnhL","core-js/modules/es.reflect.own-keys.js":"fiFO6","core-js/modules/es.reflect.prevent-extensions.js":"3NZwH","core-js/modules/es.reflect.set.js":"4ttQD","core-js/modules/es.reflect.set-prototype-of.js":"haCVw","core-js/modules/es.regexp.constructor.js":"aMiO2","core-js/modules/es.regexp.exec.js":"8GLaL","core-js/modules/es.regexp.flags.js":"6ntvp","core-js/modules/es.regexp.to-string.js":"9WSrH","core-js/modules/es.set.js":"bkZx6","core-js/modules/es.string.code-point-at.js":"eFUXN","core-js/modules/es.string.ends-with.js":"jlRRV","core-js/modules/es.string.from-code-point.js":"8dzdG","core-js/modules/es.string.includes.js":"fbLIU","core-js/modules/es.string.iterator.js":"efGNi","core-js/modules/es.string.match.js":"7JswF","core-js/modules/es.string.pad-end.js":"hTO41","core-js/modules/es.string.pad-start.js":"aRs3l","core-js/modules/es.string.raw.js":"fsNzV","core-js/modules/es.string.repeat.js":"d9VxP","core-js/modules/es.string.replace.js":"3dPVu","core-js/modules/es.string.search.js":"j0kVu","core-js/modules/es.string.split.js":"dTeue","core-js/modules/es.string.starts-with.js":"bZMEQ","core-js/modules/es.string.trim.js":"9mNsu","core-js/modules/es.string.trim-end.js":"lwHtl","core-js/modules/es.string.trim-start.js":"d19Tk","core-js/modules/es.typed-array.float32-array.js":"7QyjU","core-js/modules/es.typed-array.float64-array.js":"fPHSb","core-js/modules/es.typed-array.int8-array.js":"7euH4","core-js/modules/es.typed-array.int16-array.js":"7OtnL","core-js/modules/es.typed-array.int32-array.js":"abnJN","core-js/modules/es.typed-array.uint8-array.js":"7FphC","core-js/modules/es.typed-array.uint8-clamped-array.js":"81bsh","core-js/modules/es.typed-array.uint16-array.js":"41Nm9","core-js/modules/es.typed-array.uint32-array.js":"9Utrr","core-js/modules/es.typed-array.copy-within.js":"hjzWK","core-js/modules/es.typed-array.every.js":"f6pKr","core-js/modules/es.typed-array.fill.js":"kZHvq","core-js/modules/es.typed-array.filter.js":"SkuGK","core-js/modules/es.typed-array.find.js":"gAg8F","core-js/modules/es.typed-array.find-index.js":"ldOPB","core-js/modules/es.typed-array.for-each.js":"erHQw","core-js/modules/es.typed-array.from.js":"lMq2D","core-js/modules/es.typed-array.includes.js":"kwi1H","core-js/modules/es.typed-array.index-of.js":"lSi5i","core-js/modules/es.typed-array.iterator.js":"ivRTU","core-js/modules/es.typed-array.join.js":"k9wfb","core-js/modules/es.typed-array.last-index-of.js":"cH7gK","core-js/modules/es.typed-array.map.js":"bqhcK","core-js/modules/es.typed-array.of.js":"aGvtF","core-js/modules/es.typed-array.reduce.js":"d7pHY","core-js/modules/es.typed-array.reduce-right.js":"68CMs","core-js/modules/es.typed-array.reverse.js":"geW5Q","core-js/modules/es.typed-array.set.js":"hA0Fq","core-js/modules/es.typed-array.slice.js":"5gOQa","core-js/modules/es.typed-array.some.js":"1WFP9","core-js/modules/es.typed-array.sort.js":"f4Zy4","core-js/modules/es.typed-array.to-locale-string.js":"k4Cuj","core-js/modules/es.typed-array.to-string.js":"br3Pl","core-js/modules/es.weak-map.js":"4yZDl","core-js/modules/es.weak-set.js":"767Bx","core-js/modules/esnext.aggregate-error.js":"7faGZ","core-js/modules/esnext.global-this.js":"85gia","core-js/modules/esnext.promise.all-settled.js":"4p029","core-js/modules/esnext.promise.any.js":"4LHn1","core-js/modules/esnext.string.match-all.js":"dL3rU","core-js/modules/esnext.string.replace-all.js":"ewBaK","core-js/modules/esnext.symbol.dispose.js":"fLC1u","core-js/modules/web.dom-collections.for-each.js":"dqGR0","core-js/modules/web.dom-collections.iterator.js":"25IM7","core-js/modules/web.immediate.js":"22acx","core-js/modules/web.queue-microtask.js":"lg4Qc","core-js/modules/web.url.js":"lkPwL","core-js/modules/web.url.to-json.js":"7QnbR","core-js/modules/web.url-search-params.js":"1qDcB","regenerator-runtime/runtime":"gwp18","./model":"3mAOI","./views/recipeView":"ah8UK","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS","./views/searchView":"8Iknt","./views/resultsView":"5c7S5"}],"5i5pn":[function(require,module,exports) {
+},{"@swc/helpers/_/_async_to_generator":"5Aj3n","@swc/helpers/_/_ts_generator":"6WJcv","core-js/modules/es.symbol.js":"5i5pn","core-js/modules/es.symbol.description.js":"2y1hu","core-js/modules/es.symbol.async-iterator.js":"8hwx7","core-js/modules/es.symbol.has-instance.js":"kSpwA","core-js/modules/es.symbol.is-concat-spreadable.js":"aAuCK","core-js/modules/es.symbol.iterator.js":"6SrWX","core-js/modules/es.symbol.match.js":"j5cDp","core-js/modules/es.symbol.replace.js":"7A7O5","core-js/modules/es.symbol.search.js":"1OQjH","core-js/modules/es.symbol.species.js":"aDyhg","core-js/modules/es.symbol.split.js":"15gzF","core-js/modules/es.symbol.to-primitive.js":"2fUW5","core-js/modules/es.symbol.to-string-tag.js":"ewn9y","core-js/modules/es.symbol.unscopables.js":"51wuE","core-js/modules/es.array.concat.js":"6V5Yf","core-js/modules/es.array.copy-within.js":"kSNVt","core-js/modules/es.array.fill.js":"kVMX6","core-js/modules/es.array.filter.js":"eGF4B","core-js/modules/es.array.find.js":"8II9k","core-js/modules/es.array.find-index.js":"91R5f","core-js/modules/es.array.flat.js":"k4Uet","core-js/modules/es.array.flat-map.js":"eTbtK","core-js/modules/es.array.from.js":"kVMXz","core-js/modules/es.array.includes.js":"EohDV","core-js/modules/es.array.index-of.js":"9K7Ns","core-js/modules/es.array.iterator.js":"9477y","core-js/modules/es.array.last-index-of.js":"fBWw8","core-js/modules/es.array.map.js":"5UYQy","core-js/modules/es.array.of.js":"CFC6m","core-js/modules/es.array.reduce.js":"a362r","core-js/modules/es.array.reduce-right.js":"av3gR","core-js/modules/es.array.slice.js":"kDEwX","core-js/modules/es.array.sort.js":"hPvQb","core-js/modules/es.array.species.js":"dDREv","core-js/modules/es.array.splice.js":"dE14h","core-js/modules/es.array.unscopables.flat.js":"g2F5e","core-js/modules/es.array.unscopables.flat-map.js":"2wYsw","core-js/modules/es.date.to-primitive.js":"l0wQ9","core-js/modules/es.function.has-instance.js":"94DIL","core-js/modules/es.json.to-string-tag.js":"3HsCC","core-js/modules/es.map.js":"dD1Tk","core-js/modules/es.math.acosh.js":"3vW30","core-js/modules/es.math.asinh.js":"jxHgF","core-js/modules/es.math.atanh.js":"6Sjgi","core-js/modules/es.math.cbrt.js":"b8MkE","core-js/modules/es.math.clz32.js":"kOrye","core-js/modules/es.math.cosh.js":"kJwuN","core-js/modules/es.math.expm1.js":"bVrej","core-js/modules/es.math.fround.js":"liuh6","core-js/modules/es.math.hypot.js":"3rqos","core-js/modules/es.math.log10.js":"3stMG","core-js/modules/es.math.log1p.js":"8Sc6M","core-js/modules/es.math.log2.js":"d1LY4","core-js/modules/es.math.sign.js":"6GqCv","core-js/modules/es.math.sinh.js":"1Lh1l","core-js/modules/es.math.tanh.js":"ipDbE","core-js/modules/es.math.to-string-tag.js":"iZPqD","core-js/modules/es.math.trunc.js":"dHL9U","core-js/modules/es.number.constructor.js":"gOch3","core-js/modules/es.number.epsilon.js":"a1xdL","core-js/modules/es.number.is-integer.js":"dXYT2","core-js/modules/es.number.is-safe-integer.js":"j6Bh6","core-js/modules/es.number.max-safe-integer.js":"7rrlT","core-js/modules/es.number.min-safe-integer.js":"ctaxb","core-js/modules/es.number.parse-float.js":"20PVR","core-js/modules/es.number.parse-int.js":"1HONd","core-js/modules/es.object.assign.js":"8A7D1","core-js/modules/es.object.define-getter.js":"eNtVm","core-js/modules/es.object.define-properties.js":"hut41","core-js/modules/es.object.define-property.js":"2bZ6G","core-js/modules/es.object.define-setter.js":"kFOOA","core-js/modules/es.object.entries.js":"ZGjWv","core-js/modules/es.object.freeze.js":"8M81m","core-js/modules/es.object.from-entries.js":"4VjRy","core-js/modules/es.object.get-own-property-descriptor.js":"5sSNV","core-js/modules/es.object.get-own-property-descriptors.js":"bPpwC","core-js/modules/es.object.get-own-property-names.js":"3tqdq","core-js/modules/es.object.get-prototype-of.js":"fivNL","core-js/modules/es.object.is-extensible.js":"3crwL","core-js/modules/es.object.is-frozen.js":"7FSzR","core-js/modules/es.object.is-sealed.js":"2sQvw","core-js/modules/es.object.keys.js":"jyKJB","core-js/modules/es.object.lookup-getter.js":"85GeP","core-js/modules/es.object.lookup-setter.js":"jUABO","core-js/modules/es.object.prevent-extensions.js":"drbQJ","core-js/modules/es.object.seal.js":"2qCeI","core-js/modules/es.object.set-prototype-of.js":"5T7yg","core-js/modules/es.object.to-string.js":"8nFRu","core-js/modules/es.object.values.js":"69hf0","core-js/modules/es.parse-float.js":"1mjF5","core-js/modules/es.parse-int.js":"l5b3J","core-js/modules/es.promise.js":"b7wyz","core-js/modules/es.promise.finally.js":"kjQa6","core-js/modules/es.reflect.apply.js":"459bf","core-js/modules/es.reflect.construct.js":"5p367","core-js/modules/es.reflect.define-property.js":"6amgG","core-js/modules/es.reflect.delete-property.js":"7ziTV","core-js/modules/es.reflect.get.js":"4lblA","core-js/modules/es.reflect.get-own-property-descriptor.js":"6XboF","core-js/modules/es.reflect.get-prototype-of.js":"cauNy","core-js/modules/es.reflect.has.js":"2xx6i","core-js/modules/es.reflect.is-extensible.js":"iYnhL","core-js/modules/es.reflect.own-keys.js":"fiFO6","core-js/modules/es.reflect.prevent-extensions.js":"3NZwH","core-js/modules/es.reflect.set.js":"4ttQD","core-js/modules/es.reflect.set-prototype-of.js":"haCVw","core-js/modules/es.regexp.constructor.js":"aMiO2","core-js/modules/es.regexp.exec.js":"8GLaL","core-js/modules/es.regexp.flags.js":"6ntvp","core-js/modules/es.regexp.to-string.js":"9WSrH","core-js/modules/es.set.js":"bkZx6","core-js/modules/es.string.code-point-at.js":"eFUXN","core-js/modules/es.string.ends-with.js":"jlRRV","core-js/modules/es.string.from-code-point.js":"8dzdG","core-js/modules/es.string.includes.js":"fbLIU","core-js/modules/es.string.iterator.js":"efGNi","core-js/modules/es.string.match.js":"7JswF","core-js/modules/es.string.pad-end.js":"hTO41","core-js/modules/es.string.pad-start.js":"aRs3l","core-js/modules/es.string.raw.js":"fsNzV","core-js/modules/es.string.repeat.js":"d9VxP","core-js/modules/es.string.replace.js":"3dPVu","core-js/modules/es.string.search.js":"j0kVu","core-js/modules/es.string.split.js":"dTeue","core-js/modules/es.string.starts-with.js":"bZMEQ","core-js/modules/es.string.trim.js":"9mNsu","core-js/modules/es.string.trim-end.js":"lwHtl","core-js/modules/es.string.trim-start.js":"d19Tk","core-js/modules/es.typed-array.float32-array.js":"7QyjU","core-js/modules/es.typed-array.float64-array.js":"fPHSb","core-js/modules/es.typed-array.int8-array.js":"7euH4","core-js/modules/es.typed-array.int16-array.js":"7OtnL","core-js/modules/es.typed-array.int32-array.js":"abnJN","core-js/modules/es.typed-array.uint8-array.js":"7FphC","core-js/modules/es.typed-array.uint8-clamped-array.js":"81bsh","core-js/modules/es.typed-array.uint16-array.js":"41Nm9","core-js/modules/es.typed-array.uint32-array.js":"9Utrr","core-js/modules/es.typed-array.copy-within.js":"hjzWK","core-js/modules/es.typed-array.every.js":"f6pKr","core-js/modules/es.typed-array.fill.js":"kZHvq","core-js/modules/es.typed-array.filter.js":"SkuGK","core-js/modules/es.typed-array.find.js":"gAg8F","core-js/modules/es.typed-array.find-index.js":"ldOPB","core-js/modules/es.typed-array.for-each.js":"erHQw","core-js/modules/es.typed-array.from.js":"lMq2D","core-js/modules/es.typed-array.includes.js":"kwi1H","core-js/modules/es.typed-array.index-of.js":"lSi5i","core-js/modules/es.typed-array.iterator.js":"ivRTU","core-js/modules/es.typed-array.join.js":"k9wfb","core-js/modules/es.typed-array.last-index-of.js":"cH7gK","core-js/modules/es.typed-array.map.js":"bqhcK","core-js/modules/es.typed-array.of.js":"aGvtF","core-js/modules/es.typed-array.reduce.js":"d7pHY","core-js/modules/es.typed-array.reduce-right.js":"68CMs","core-js/modules/es.typed-array.reverse.js":"geW5Q","core-js/modules/es.typed-array.set.js":"hA0Fq","core-js/modules/es.typed-array.slice.js":"5gOQa","core-js/modules/es.typed-array.some.js":"1WFP9","core-js/modules/es.typed-array.sort.js":"f4Zy4","core-js/modules/es.typed-array.to-locale-string.js":"k4Cuj","core-js/modules/es.typed-array.to-string.js":"br3Pl","core-js/modules/es.weak-map.js":"4yZDl","core-js/modules/es.weak-set.js":"767Bx","core-js/modules/esnext.aggregate-error.js":"7faGZ","core-js/modules/esnext.global-this.js":"85gia","core-js/modules/esnext.promise.all-settled.js":"4p029","core-js/modules/esnext.promise.any.js":"4LHn1","core-js/modules/esnext.string.match-all.js":"dL3rU","core-js/modules/esnext.string.replace-all.js":"ewBaK","core-js/modules/esnext.symbol.dispose.js":"fLC1u","core-js/modules/web.dom-collections.for-each.js":"dqGR0","core-js/modules/web.dom-collections.iterator.js":"25IM7","core-js/modules/web.immediate.js":"22acx","core-js/modules/web.queue-microtask.js":"lg4Qc","core-js/modules/web.url.js":"lkPwL","core-js/modules/web.url.to-json.js":"7QnbR","core-js/modules/web.url-search-params.js":"1qDcB","regenerator-runtime/runtime":"gwp18","./model":"3mAOI","./views/recipeView":"ah8UK","./views/searchView":"8Iknt","./views/resultsView":"5c7S5","./views/paginationView":"1UMhw","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"5i5pn":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require("9907e25c4a0aca96");
 require("6ca7b218a3c5142b");
@@ -14285,6 +14303,12 @@ parcelHelpers.export(exports, "loadRecipe", function() {
 parcelHelpers.export(exports, "loadSearchResults", function() {
     return loadSearchResults;
 });
+parcelHelpers.export(exports, "getSearchResultsPage", function() {
+    return getSearchResultsPage;
+});
+parcelHelpers.export(exports, "updateServings", function() {
+    return updateServings;
+});
 var _asyncToGenerator = require("@swc/helpers/_/_async_to_generator");
 var _tsGenerator = require("@swc/helpers/_/_ts_generator");
 var _config = require("./config");
@@ -14293,7 +14317,9 @@ var state = {
     recipe: {},
     search: {
         query: "",
-        results: []
+        results: [],
+        page: 1,
+        resultsPerPage: (0, _config.RES_PER_PAGE)
     }
 };
 var loadRecipe = function() {
@@ -14370,7 +14396,6 @@ var loadSearchResults = function() {
                             title: rec.title
                         };
                     });
-                    console.log(state.search.results);
                     return [
                         3,
                         3
@@ -14389,14 +14414,33 @@ var loadSearchResults = function() {
         return _ref.apply(this, arguments);
     };
 }();
+var getSearchResultsPage = function() {
+    var page = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : state.search.page;
+    state.search.page = page;
+    var start = (page - 1) * state.search.resultsPerPage //0
+    ;
+    var end = page * state.search.resultsPerPage // 9
+    ;
+    return state.search.results.slice(start, end);
+};
+var updateServings = function(newServings) {
+    state.recipe.ingredients.forEach(function(ing) {
+        ing.quantity = ing.quantity * newServings / state.recipe.servings;
+        state.recipe.servings = newServings;
+    });
+};
 
-},{"@swc/helpers/_/_async_to_generator":"5Aj3n","@swc/helpers/_/_ts_generator":"6WJcv","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS","./config":"hJkJw","./helpers":"k4pgI"}],"hJkJw":[function(require,module,exports) {
+},{"@swc/helpers/_/_async_to_generator":"5Aj3n","@swc/helpers/_/_ts_generator":"6WJcv","./config":"hJkJw","./helpers":"k4pgI","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"hJkJw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", function() {
     return API_URL;
 });
+parcelHelpers.export(exports, "RES_PER_PAGE", function() {
+    return RES_PER_PAGE;
+});
 var API_URL = "https://forkify-api.herokuapp.com/api/v2/recipes/";
+var RES_PER_PAGE = 10;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"k4pgI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -14499,9 +14543,20 @@ var RecipeView = /*#__PURE__*/ function(View) {
             }
         },
         {
+            key: "addHandlerUpdateServings",
+            value: function addHandlerUpdateServings(handler) {
+                this._parentEl.addEventListener("click", function(e) {
+                    var btn = e.target.closest(".btn--update-servings");
+                    if (!btn) return;
+                    var updateTo = +btn.dataset.updateTo;
+                    if (updateTo > 0) handler(updateTo);
+                });
+            }
+        },
+        {
             key: "_generateMarkup",
             value: function _generateMarkup() {
-                return ' <figure class="recipe__fig">\n        <img src="'.concat(this._data.image, '" alt="').concat(this._data.title, '" class="recipe__img" />\n        <h1 class="recipe__title">\n          <span>').concat(this._data.title, '</span>\n        </h1>\n      </figure>\n\n      <div class="recipe__details">\n        // <div class="recipe__info">\n          <svg class="recipe__info-icon">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-clock"></use>\n          </svg>\n          <span class="recipe__info-data recipe__info-data--minutes">').concat(this._data.cookingTime, '</span>\n          <span class="recipe__info-text">minutes</span>\n        </div>\n        <div class="recipe__info">\n          <svg class="recipe__info-icon">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-users"></use>\n          </svg>\n          <span class="recipe__info-data recipe__info-data--people">').concat(this._data.servings, '</span>\n          <span class="recipe__info-text">servings</span>\n\n          <div class="recipe__info-buttons">\n            <button class="btn--tiny btn--increase-servings">\n              <svg>\n                <use href="').concat((0, _iconsSvgDefault.default), '#icon-minus-circle"></use>\n              </svg>\n            </button>\n            <button class="btn--tiny btn--increase-servings">\n              <svg>\n                <use href="').concat((0, _iconsSvgDefault.default), '#icon-plus-circle"></use>\n              </svg>\n            </button>\n          </div>\n        </div>\n\n        <div class="recipe__user-generated">\n        </div>\n        <button class="btn--round">\n          <svg class="">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-bookmark-fill"></use>\n          </svg>\n        </button>\n      </div>\n\n      <div class="recipe__ingredients">\n        <h2 class="heading--2">Recipe ingredients</h2>\n        <ul class="recipe__ingredient-list">\n        ').concat(this._data.ingredients.map(function(ing) {
+                return ' <figure class="recipe__fig">\n        <img src="'.concat(this._data.image, '" alt="').concat(this._data.title, '" class="recipe__img" />\n        <h1 class="recipe__title">\n          <span>').concat(this._data.title, '</span>\n        </h1>\n      </figure>\n\n      <div class="recipe__details">\n         <div class="recipe__info">\n          <svg class="recipe__info-icon">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-clock"></use>\n          </svg>\n          <span class="recipe__info-data recipe__info-data--minutes">').concat(this._data.cookingTime, '</span>\n          <span class="recipe__info-text">minutes</span>\n        </div>\n        <div class="recipe__info">\n          <svg class="recipe__info-icon">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-users"></use>\n          </svg>\n          <span class="recipe__info-data recipe__info-data--people">').concat(this._data.servings, '</span>\n          <span class="recipe__info-text">servings</span>\n\n          <div class="recipe__info-buttons">\n            <button class="btn--tiny btn--update-servings" data-update-to="').concat(this._data.servings - 1, '">\n              <svg>\n                <use href="').concat((0, _iconsSvgDefault.default), '#icon-minus-circle"></use>\n              </svg>\n            </button>\n            <button class="btn--tiny btn--update-servings" data-update-to="').concat(this._data.servings + 1, '">\n              <svg>\n                <use href="').concat((0, _iconsSvgDefault.default), '#icon-plus-circle"></use>\n              </svg>\n            </button>\n          </div>\n        </div>\n\n        <div class="recipe__user-generated">\n        </div>\n        <button class="btn--round">\n          <svg class="">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-bookmark-fill"></use>\n          </svg>\n        </button>\n      </div>\n\n      <div class="recipe__ingredients">\n        <h2 class="heading--2">Recipe ingredients</h2>\n        <ul class="recipe__ingredient-list">\n        ').concat(this._data.ingredients.map(function(ing) {
                     return ' \n           <li class="recipe__ingredient">\n            <svg class="recipe__icon">\n              <use href="'.concat((0, _iconsSvgDefault.default), '#icon-check"></use>\n            </svg>\n            <div class="recipe__quantity">').concat(ing.quantity ? new (0, _fractional.Fraction)(ing.quantity).toString() : "", '</div>\n            <div class="recipe__description">\n              <span class="recipe__unit">').concat(ing.unit, "</span>\n              ").concat(ing.description, "\n            </div>\n          </li>");
                 }).join(""), '\n      </div>\n\n      <div class="recipe__directions">\n        <h2 class="heading--2">How to cook it</h2>\n        <p class="recipe__directions-text">\n          This recipe was carefully designed and tested by\n          <span class="recipe__publisher">').concat(this._data.publisher, '</span>. Please check out\n          directions at their website.\n        </p>\n        <a\n          class="btn--small recipe__btn"\n          href="').concat(this._data.sourceUrl, '"\n          target="_blank"\n        >\n          <span>Directions</span>\n          <svg class="search__icon">\n            <use href="').concat((0, _iconsSvgDefault.default), '#icon-arrow-right"></use>\n          </svg>\n        </a>\n      </div>');
             }
@@ -14511,7 +14566,21 @@ var RecipeView = /*#__PURE__*/ function(View) {
 }((0, _viewDefault.default));
 exports.default = new RecipeView();
 
-},{"@swc/helpers/_/_class_call_check":"8rnHD","@swc/helpers/_/_create_class":"1GKMK","../../img/icons.svg":"3FuW9","fractional":"gSuOV","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS","@swc/helpers/_/_assert_this_initialized":"gv4b9","@swc/helpers/_/_define_property":"6IkiD","@swc/helpers/_/_inherits":"hpnTP","@swc/helpers/_/_create_super":"6lmZ7","./View":"aHWnV"}],"8rnHD":[function(require,module,exports) {
+},{"@swc/helpers/_/_assert_this_initialized":"gv4b9","@swc/helpers/_/_class_call_check":"8rnHD","@swc/helpers/_/_create_class":"1GKMK","@swc/helpers/_/_define_property":"6IkiD","@swc/helpers/_/_inherits":"hpnTP","@swc/helpers/_/_create_super":"6lmZ7","../../img/icons.svg":"3FuW9","fractional":"gSuOV","./View":"aHWnV","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"gv4b9":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_assert_this_initialized", function() {
+    return _assert_this_initialized;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _assert_this_initialized;
+});
+function _assert_this_initialized(self) {
+    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    return self;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"8rnHD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "_class_call_check", function() {
@@ -14548,7 +14617,143 @@ function _create_class(Constructor, protoProps, staticProps) {
     return Constructor;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"3FuW9":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"6IkiD":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_define_property", function() {
+    return _define_property;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _define_property;
+});
+function _define_property(obj, key, value) {
+    if (key in obj) Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+    });
+    else obj[key] = value;
+    return obj;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"hpnTP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_inherits", function() {
+    return _inherits;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _inherits;
+});
+var _setPrototypeOfJs = require("./_set_prototype_of.js");
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+            value: subClass,
+            writable: true,
+            configurable: true
+        }
+    });
+    if (superClass) (0, _setPrototypeOfJs._set_prototype_of)(subClass, superClass);
+}
+
+},{"./_set_prototype_of.js":"ggsnR","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"ggsnR":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_set_prototype_of", function() {
+    return _set_prototype_of;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _set_prototype_of;
+});
+function _set_prototype_of(o, p) {
+    _set_prototype_of = Object.setPrototypeOf || function setPrototypeOf(o, p) {
+        o.__proto__ = p;
+        return o;
+    };
+    return _set_prototype_of(o, p);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"6lmZ7":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_create_super", function() {
+    return _create_super;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _create_super;
+});
+var _getPrototypeOfJs = require("./_get_prototype_of.js");
+var _isNativeReflectConstructJs = require("./_is_native_reflect_construct.js");
+var _possibleConstructorReturnJs = require("./_possible_constructor_return.js");
+function _create_super(Derived) {
+    var hasNativeReflectConstruct = (0, _isNativeReflectConstructJs._is_native_reflect_construct)();
+    return function _createSuperInternal() {
+        var Super = (0, _getPrototypeOfJs._get_prototype_of)(Derived), result;
+        if (hasNativeReflectConstruct) {
+            var NewTarget = (0, _getPrototypeOfJs._get_prototype_of)(this).constructor;
+            result = Reflect.construct(Super, arguments, NewTarget);
+        } else result = Super.apply(this, arguments);
+        return (0, _possibleConstructorReturnJs._possible_constructor_return)(this, result);
+    };
+}
+
+},{"./_get_prototype_of.js":"aJfix","./_is_native_reflect_construct.js":"hQVlV","./_possible_constructor_return.js":"jw7MX","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"aJfix":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_get_prototype_of", function() {
+    return _get_prototype_of;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _get_prototype_of;
+});
+function _get_prototype_of(o) {
+    _get_prototype_of = Object.setPrototypeOf ? Object.getPrototypeOf : function getPrototypeOf(o) {
+        return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _get_prototype_of(o);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"hQVlV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_is_native_reflect_construct", function() {
+    return _is_native_reflect_construct;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _is_native_reflect_construct;
+});
+function _is_native_reflect_construct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+    try {
+        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"jw7MX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_possible_constructor_return", function() {
+    return _possible_constructor_return;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _possible_constructor_return;
+});
+var _assertThisInitializedJs = require("./_assert_this_initialized.js");
+var _typeOfJs = require("./_type_of.js");
+function _possible_constructor_return(self, call) {
+    if (call && ((0, _typeOfJs._type_of)(call) === "object" || typeof call === "function")) return call;
+    return (0, _assertThisInitializedJs._assert_this_initialized)(self);
+}
+
+},{"./_assert_this_initialized.js":"gv4b9","./_type_of.js":"it86L","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"3FuW9":[function(require,module,exports) {
 module.exports = require("511d3533ce04c0a9").getBundleURL("6txD3") + "icons.027c9824.svg" + "?" + Date.now();
 
 },{"511d3533ce04c0a9":"77bZe"}],"77bZe":[function(require,module,exports) {
@@ -14839,157 +15044,7 @@ Fraction.primeFactors = function(n) {
 };
 module.exports.Fraction = Fraction;
 
-},{}],"gv4b9":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_assert_this_initialized", function() {
-    return _assert_this_initialized;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _assert_this_initialized;
-});
-function _assert_this_initialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"6IkiD":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_define_property", function() {
-    return _define_property;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _define_property;
-});
-function _define_property(obj, key, value) {
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"hpnTP":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_inherits", function() {
-    return _inherits;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _inherits;
-});
-var _setPrototypeOfJs = require("./_set_prototype_of.js");
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    if (superClass) (0, _setPrototypeOfJs._set_prototype_of)(subClass, superClass);
-}
-
-},{"./_set_prototype_of.js":"ggsnR","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"ggsnR":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_set_prototype_of", function() {
-    return _set_prototype_of;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _set_prototype_of;
-});
-function _set_prototype_of(o, p) {
-    _set_prototype_of = Object.setPrototypeOf || function setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-    };
-    return _set_prototype_of(o, p);
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"6lmZ7":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_create_super", function() {
-    return _create_super;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _create_super;
-});
-var _getPrototypeOfJs = require("./_get_prototype_of.js");
-var _isNativeReflectConstructJs = require("./_is_native_reflect_construct.js");
-var _possibleConstructorReturnJs = require("./_possible_constructor_return.js");
-function _create_super(Derived) {
-    var hasNativeReflectConstruct = (0, _isNativeReflectConstructJs._is_native_reflect_construct)();
-    return function _createSuperInternal() {
-        var Super = (0, _getPrototypeOfJs._get_prototype_of)(Derived), result;
-        if (hasNativeReflectConstruct) {
-            var NewTarget = (0, _getPrototypeOfJs._get_prototype_of)(this).constructor;
-            result = Reflect.construct(Super, arguments, NewTarget);
-        } else result = Super.apply(this, arguments);
-        return (0, _possibleConstructorReturnJs._possible_constructor_return)(this, result);
-    };
-}
-
-},{"./_get_prototype_of.js":"aJfix","./_is_native_reflect_construct.js":"hQVlV","./_possible_constructor_return.js":"jw7MX","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"aJfix":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_get_prototype_of", function() {
-    return _get_prototype_of;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _get_prototype_of;
-});
-function _get_prototype_of(o) {
-    _get_prototype_of = Object.setPrototypeOf ? Object.getPrototypeOf : function getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _get_prototype_of(o);
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"hQVlV":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_is_native_reflect_construct", function() {
-    return _is_native_reflect_construct;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _is_native_reflect_construct;
-});
-function _is_native_reflect_construct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-        return true;
-    } catch (e) {
-        return false;
-    }
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"jw7MX":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_possible_constructor_return", function() {
-    return _possible_constructor_return;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _possible_constructor_return;
-});
-var _assertThisInitializedJs = require("./_assert_this_initialized.js");
-var _typeOfJs = require("./_type_of.js");
-function _possible_constructor_return(self, call) {
-    if (call && ((0, _typeOfJs._type_of)(call) === "object" || typeof call === "function")) return call;
-    return (0, _assertThisInitializedJs._assert_this_initialized)(self);
-}
-
-},{"./_assert_this_initialized.js":"gv4b9","./_type_of.js":"it86L","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"aHWnV":[function(require,module,exports) {
+},{}],"aHWnV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", function() {
@@ -15015,6 +15070,23 @@ var View = /*#__PURE__*/ function() {
                 var markup = this._generateMarkup();
                 this._clear();
                 this._parentEl.insertAdjacentHTML("afterbegin", markup);
+            }
+        },
+        {
+            key: "update",
+            value: function update(data) {
+                this._data = data;
+                var newMarkup = this._generateMarkup();
+                var newDOM = document.createRange().createContextualFragment(newMarkup);
+                var newElements = Array.from(newDOM.querySelectorAll("*"));
+                var curElements = Array.from(this._parentEl.querySelectorAll("*"));
+                newElements.forEach(function(newEl, i) {
+                    var curEl = curElements[i];
+                    if (!newEl.isEqualNode(curEl) && newEl.firstChild.nodeValue.trim() !== "") curEl.textContent = newEl.textContent;
+                    if (!newEl.isEqualNode(curEl)) Array.from(newEl.attributes).forEach(function(attr) {
+                        curEl.setAttribute(attr.name, attr.value);
+                    });
+                });
             }
         },
         {
@@ -15090,7 +15162,7 @@ function clearInput() {
 }
 exports.default = new SearchView();
 
-},{"@swc/helpers/_/_class_call_check":"8rnHD","@swc/helpers/_/_class_private_field_get":"gHJlk","@swc/helpers/_/_class_private_field_init":"cUv9G","@swc/helpers/_/_create_class":"1GKMK","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS","@swc/helpers/_/_class_private_method_init":"jAygc","@swc/helpers/_/_class_private_method_get":"jFAfY"}],"gHJlk":[function(require,module,exports) {
+},{"@swc/helpers/_/_class_call_check":"8rnHD","@swc/helpers/_/_class_private_field_get":"gHJlk","@swc/helpers/_/_class_private_field_init":"cUv9G","@swc/helpers/_/_class_private_method_get":"jFAfY","@swc/helpers/_/_class_private_method_init":"jAygc","@swc/helpers/_/_create_class":"1GKMK","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"gHJlk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "_class_private_field_get", function() {
@@ -15162,6 +15234,20 @@ function _check_private_redeclaration(obj, privateCollection) {
     if (privateCollection.has(obj)) throw new TypeError("Cannot initialize the same private elements twice on an object");
 }
 
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"jFAfY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_class_private_method_get", function() {
+    return _class_private_method_get;
+});
+parcelHelpers.export(exports, "_", function() {
+    return _class_private_method_get;
+});
+function _class_private_method_get(receiver, privateSet, fn) {
+    if (!privateSet.has(receiver)) throw new TypeError("attempted to get private field on non-instance");
+    return fn;
+}
+
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"jAygc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -15177,21 +15263,7 @@ function _class_private_method_init(obj, privateSet) {
     privateSet.add(obj);
 }
 
-},{"./_check_private_redeclaration.js":"aG7Fz","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"jFAfY":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_class_private_method_get", function() {
-    return _class_private_method_get;
-});
-parcelHelpers.export(exports, "_", function() {
-    return _class_private_method_get;
-});
-function _class_private_method_get(receiver, privateSet, fn) {
-    if (!privateSet.has(receiver)) throw new TypeError("attempted to get private field on non-instance");
-    return fn;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"5c7S5":[function(require,module,exports) {
+},{"./_check_private_redeclaration.js":"aG7Fz","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"5c7S5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _assertThisInitialized = require("@swc/helpers/_/_assert_this_initialized");
@@ -15200,8 +15272,6 @@ var _createClass = require("@swc/helpers/_/_create_class");
 var _defineProperty = require("@swc/helpers/_/_define_property");
 var _inherits = require("@swc/helpers/_/_inherits");
 var _createSuper = require("@swc/helpers/_/_create_super");
-var _iconsSvg = require("../../img/icons.svg");
-var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 var _view = require("./View");
 var _viewDefault = parcelHelpers.interopDefault(_view);
 var ResultsView = /*#__PURE__*/ function(View) {
@@ -15220,14 +15290,14 @@ var ResultsView = /*#__PURE__*/ function(View) {
         {
             key: "_generateMarkup",
             value: function _generateMarkup() {
-                console.log(this._data);
                 return this._data.map(this._generateMarkupPreview).join("");
             }
         },
         {
             key: "_generateMarkupPreview",
             value: function _generateMarkupPreview(results) {
-                return '  \n        <li class="preview">\n            <a class="preview__link" href="#'.concat(results.id, '">\n               <figure class="preview__fig">\n                <img src="').concat(results.image, '" alt="').concat(results.title, '" />\n                </figure>\n                <div class="preview__data">\n                <h4 class="preview__title">').concat(results.title, '</h4>\n                <p class="preview__publisher">').concat(results.publisher, "</p>\n            </div>\n            </a>\n      </li>");
+                var id = window.location.hash.slice(1);
+                return '  \n        <li class="preview">\n            <a class="preview__link '.concat(results.id === id ? "preview__link--active" : "", '" href="#').concat(results.id, '">\n               <figure class="preview__fig">\n                <img src="').concat(results.image, '" alt="').concat(results.title, '" />\n                </figure>\n                <div class="preview__data">\n                <h4 class="preview__title">').concat(results.title, '</h4>\n                <p class="preview__publisher">').concat(results.publisher, "</p>\n            </div>\n            </a>\n      </li>");
             }
         }
     ]);
@@ -15235,6 +15305,70 @@ var ResultsView = /*#__PURE__*/ function(View) {
 }((0, _viewDefault.default));
 exports.default = new ResultsView();
 
-},{"@swc/helpers/_/_assert_this_initialized":"gv4b9","@swc/helpers/_/_class_call_check":"8rnHD","@swc/helpers/_/_define_property":"6IkiD","@swc/helpers/_/_inherits":"hpnTP","@swc/helpers/_/_create_super":"6lmZ7","./View":"aHWnV","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS","@swc/helpers/_/_create_class":"1GKMK","../../img/icons.svg":"3FuW9"}]},["hCuLA","8F2RK"], "8F2RK", "parcelRequire7e89")
+},{"@swc/helpers/_/_assert_this_initialized":"gv4b9","@swc/helpers/_/_class_call_check":"8rnHD","@swc/helpers/_/_create_class":"1GKMK","@swc/helpers/_/_define_property":"6IkiD","@swc/helpers/_/_inherits":"hpnTP","@swc/helpers/_/_create_super":"6lmZ7","./View":"aHWnV","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}],"1UMhw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _assertThisInitialized = require("@swc/helpers/_/_assert_this_initialized");
+var _classCallCheck = require("@swc/helpers/_/_class_call_check");
+var _createClass = require("@swc/helpers/_/_create_class");
+var _defineProperty = require("@swc/helpers/_/_define_property");
+var _inherits = require("@swc/helpers/_/_inherits");
+var _createSuper = require("@swc/helpers/_/_create_super");
+var _view = require("./View");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+var _iconsSvg = require("../../img/icons.svg");
+var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
+var PaginationView = /*#__PURE__*/ function(View) {
+    "use strict";
+    (0, _inherits._)(PaginationView, View);
+    var _super = (0, _createSuper._)(PaginationView);
+    function PaginationView() {
+        (0, _classCallCheck._)(this, PaginationView);
+        var _this;
+        _this = _super.apply(this, arguments);
+        (0, _defineProperty._)((0, _assertThisInitialized._)(_this), "_parentEl", document.querySelector(".pagination"));
+        return _this;
+    }
+    (0, _createClass._)(PaginationView, [
+        {
+            key: "addHandlerClick",
+            value: function addHandlerClick(handler) {
+                this._parentEl.addEventListener("click", function(e) {
+                    var btn = e.target.closest(".btn--inline");
+                    if (!btn) return;
+                    var goToPage = btn.dataset.goto;
+                    handler(Number(goToPage));
+                });
+            }
+        },
+        {
+            key: "_generateMarkup",
+            value: function _generateMarkup() {
+                var curPage = this._data.page;
+                var numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage);
+                if (curPage === 1 && numPages > 1) return this._generateMarkupNextButton(curPage);
+                if (curPage === numPages && numPages > 1) return this._generateMarkupPrevButton(curPage);
+                if (curPage < numPages) return "\n            	".concat(this._generateMarkupPrevButton(curPage), "\n				").concat(this._generateMarkupNextButton(curPage), "\n                ");
+                return "";
+            }
+        },
+        {
+            key: "_generateMarkupNextButton",
+            value: function _generateMarkupNextButton(curPage) {
+                return '\n            <button data-goto="'.concat(curPage + 1, '" class="btn--inline pagination__btn--next">\n            <span>Page ').concat(curPage + 1, '</span>\n            <svg class="search__icon">\n              <use href="').concat((0, _iconsSvgDefault.default), '#icon-arrow-right"></use>\n            </svg>\n            </button>\n            ');
+            }
+        },
+        {
+            key: "_generateMarkupPrevButton",
+            value: function _generateMarkupPrevButton(curPage) {
+                return '      \n        <button data-goto="'.concat(curPage - 1, '" class="btn--inline pagination__btn--prev">\n           <svg class="search__icon">\n             <use href="').concat((0, _iconsSvgDefault.default), '#icon-arrow-left"></use>\n            </svg>\n            <span>Page ').concat(curPage - 1, "</span>\n       </button>");
+            }
+        }
+    ]);
+    return PaginationView;
+}((0, _viewDefault.default));
+exports.default = new PaginationView();
+
+},{"@swc/helpers/_/_assert_this_initialized":"gv4b9","@swc/helpers/_/_class_call_check":"8rnHD","@swc/helpers/_/_create_class":"1GKMK","@swc/helpers/_/_define_property":"6IkiD","@swc/helpers/_/_inherits":"hpnTP","@swc/helpers/_/_create_super":"6lmZ7","./View":"aHWnV","../../img/icons.svg":"3FuW9","@parcel/transformer-js/src/esmodule-helpers.js":"5ITdS"}]},["hCuLA","8F2RK"], "8F2RK", "parcelRequire7e89")
 
 //# sourceMappingURL=index.8602965e.js.map

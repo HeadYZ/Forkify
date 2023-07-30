@@ -11,6 +11,9 @@ const controlRecipes = async () => {
 		const id = window.location.hash.slice(1)
 		if (!id) return
 		recipeView.renderSpinner()
+
+		resultsView.update(model.getSearchResultsPage())
+
 		//1)) Loading recipe
 		await model.loadRecipe(id)
 		//2) Rendering recipe
@@ -57,5 +60,3 @@ const init = () => {
 	recipeView.addHandlerUpdateServings(controlServings)
 }
 init()
-
-
