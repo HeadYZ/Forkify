@@ -73,24 +73,24 @@ export const addBookmark = recipe => {
 	// Add bookmark
 	state.bookmarks.push(recipe)
 	// Mark current recipe as bookmark
-	console.log(recipe)
+
 	state.recipe.bookmarked = true
 
 	persistBookmarks()
 }
 
-// export const deleteBookmark = id => {
-// 	const index = state.bookmarks.findIndex(el => el.id === id)
-// 	state.bookmarks.splice(index, 1)
-// 	state.recipe.bookmarked = false
+export const deleteBookmark = id => {
+	const index = state.bookmarks.findIndex(el => el.id === id)
+	state.bookmarks.splice(index, 1)
+	state.recipe.bookmarked = false
 
-// 	persistBookmarks()
-// }
+	persistBookmarks()
+}
 
-// const init = () => {
-// 	const storage = localStorage.getItem('bookmarks')
+const init = () => {
+	const storage = localStorage.getItem('bookmarks')
 
-// 	if (storage) state.bookmarks = JSON.parse(storage)
-// }
+	if (storage) state.bookmarks = JSON.parse(storage)
+}
 
-// init()
+init()
