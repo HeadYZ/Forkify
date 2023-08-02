@@ -1,6 +1,6 @@
-import { API_URL } from './config'
-import { getJSON } from './helpers'
-import { RES_PER_PAGE } from './config'
+import { API_URL, RES_PER_PAGE, KEY } from './config'
+import { getJSON, sendJSON } from './helpers'
+
 export const state = {
 	recipe: {},
 	search: {
@@ -11,22 +11,25 @@ export const state = {
 	},
 	bookmarks: [],
 }
-
+const createRecipeObject = data => {
+	const { recipe } = data.data
+	return {
+		id: recipe.id,
+		publisher: recipe.publisher,
+		ingredients: recipe.ingredients,
+		image: recipe.image_url,
+		sourceUrl: recipe.source_url,
+		title: recipe.title,
+		servings: recipe.servings,
+		cookingTime: recipe.cooking_time,
+		...(recipe.key && { key: recipe.key }),
+	}
+}
 export const loadRecipe = async id => {
 	try {
 		const data = await getJSON(`${API_URL}${id}`)
-		const { recipe } = data.data
 
-		state.recipe = {
-			id: recipe.id,
-			publisher: recipe.publisher,
-			ingredients: recipe.ingredients,
-			image: recipe.image_url,
-			sourceUrl: recipe.source_url,
-			title: recipe.title,
-			servings: recipe.servings,
-			cookingTime: recipe.cooking_time,
-		}
+		state.recipe = createRecipeObject(data)
 
 		if (state.bookmarks.some(bookmark => bookmark.id === id)) state.recipe.bookmarked = true
 		else state.recipe.bookmarked = false
@@ -94,3 +97,31 @@ const init = () => {
 }
 
 init()
+
+export const uploadRecipe = async newRecipe => {
+	try {
+		const ingredients = Object.entries(newRecipe)
+			.filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
+			.map(ing => {
+				const ingArr = ing[1].replaceAll(' ', '').split(',')
+				if (ingArr.length !== 3) throw new Error('Wrong ingredient format! Please use the correct format :)')
+
+				const [quantity, unit, description] = ingArr
+				return { quantity: quantity ? +quantity : null, unit, description }
+			})
+		const recipe = {
+			publisher: newRecipe.publisher,
+			image_url: newRecipe.image,
+			source_url: newRecipe.sourceUrl,
+			title: newRecipe.title,
+			servings: +newRecipe.servings,
+			cooking_time: +newRecipe.cookingTime,
+			ingredients,
+		}
+		const data = await sendJSON(`${API_URL}?key=${KEY}`, recipe)
+		state.recipe = createRecipeObject(data)
+		addBookmark(state.recipe)
+	} catch (err) {
+		throw err
+	}
+}
